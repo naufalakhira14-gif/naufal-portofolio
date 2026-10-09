@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Customer & Marketing Analytics | Naufal Portfolio</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    :root {
+      --detail-bg: #07050f;
+      --detail-card: #0d0a18;
+      --detail-border: rgba(139, 92, 246, 0.30);
+      --detail-purple: #8b5cf6;
+      --detail-purple-light: #a78bfa;
+      --detail-text: #cfc7df;
+    }
+
+    body {
+      background: var(--detail-bg);
+    }
+
+    .project-detail {
+      width: 100%;
+      padding: 45px 48px 90px;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--detail-text);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 30px;
+      transition: 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--detail-purple-light);
+    }
+
+    .project-hero {
+      padding: 42px;
+      margin-bottom: 65px;
+      border: 1px solid var(--detail-border);
+      border-radius: 20px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(139, 92, 246, 0.14),
+          transparent 40%
+        ),
+        var(--detail-card);
+    }
+
+    .project-label {
+      color: var(--detail-purple-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .project-hero h1 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.05;
+      color: #fff;
+    }
+
+    .project-hero h1 span {
+      color: var(--detail-purple-light);
+    }
+
+    .project-intro {
+      max-width: 850px;
+      margin: 22px 0 25px;
+      color: var(--detail-text);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .project-tags span {
+      padding: 8px 13px;
+      border: 1px solid var(--detail-border);
+      border-radius: 999px;
+      color: var(--detail-text);
+      font-size: 12px;
+      background: rgba(139, 92, 246, 0.05);
+    }
+
+    .detail-section {
+      margin-bottom: 70px;
+    }
+
+    .detail-heading {
+      margin-bottom: 24px;
+    }
+
+    .detail-heading p {
+      margin: 0 0 8px;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .detail-heading h2 {
+      margin: 0;
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .detail-text {
+      max-width: 900px;
+      color: var(--detail-text);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .detail-card {
+      padding: 25px;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .detail-card h3 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .detail-card p,
+    .detail-card li {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .detail-card ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .dataset-number {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .dataset-label {
+      display: block;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dataset-note {
+      margin-top: 8px;
+      color: var(--detail-text);
+      font-size: 12px;
+    }
+
+    /* DATASET SOURCE */
+
+    .dataset-source {
+      width: 100%;
+      max-width: 950px;
+      box-sizing: border-box;
+      margin-top: 28px;
+      padding: 22px 24px;
+      border: 1px solid var(--detail-border);
+      border-radius: 14px;
+      background: var(--detail-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .dataset-source > div {
+      flex: 1;
+    }
+
+    .dataset-source span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .dataset-source h3 {
+      color: #fff;
+      font-size: 16px;
+      margin: 0 0 10px;
+    }
+
+    .dataset-source p {
+      color: var(--detail-text);
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .dataset-button {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border: 1px solid var(--detail-purple);
+      border-radius: 9px;
+      color: var(--detail-purple-light);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .dataset-button:hover {
+      background: var(--detail-purple);
+      color: #fff;
+    }
+
+    /* PIPELINE */
+
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pipeline-step {
+      padding: 13px 16px;
+      border: 1px solid var(--detail-border);
+      border-radius: 10px;
+      background: var(--detail-card);
+      color: var(--detail-text);
+      font-size: 13px;
+    }
+
+    .pipeline-step span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+
+    .pipeline-step strong {
+      color: #fff;
+      font-size: 13px;
+    }
+
+    /* VISUALIZATION */
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .visual-card {
+      overflow: hidden;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .visual-image {
+      height: 260px;
+      overflow: hidden;
+      background: #0b0815;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      cursor: zoom-in;
+      transition: filter 0.3s ease;
+    }
+
+    .visual-image img:hover {
+      filter: brightness(1.1);
+    }
+
+    .visual-caption {
+      padding: 16px 18px 19px;
+    }
+
+    .visual-caption strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .visual-caption p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* FINDINGS */
+
+    .findings-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .finding-item {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 15px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--detail-border);
+      border-radius: 12px;
+      background: var(--detail-card);
+    }
+
+    .finding-number {
+      color: var(--detail-purple-light);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .finding-item p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* GITHUB */
+
+    .github-panel {
+      padding: 30px;
+      border: 1px solid var(--detail-border);
+      border-radius: 16px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(139, 92, 246, 0.12),
+          transparent 45%
+        ),
+        var(--detail-card);
+    }
+
+    .github-panel h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .github-panel p {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 11px 18px;
+      border-radius: 9px;
+      background: var(--detail-purple);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .github-button:hover {
+      background: var(--detail-purple-light);
+      color: #08050f;
+    }
+
+    .bottom-back {
+      margin-top: 40px;
+    }
+
+    /* LIGHTBOX */
+
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      box-sizing: border-box;
+      background: rgba(4, 2, 10, 0.96);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: 0.25s ease;
+    }
+
+    .image-lightbox.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .image-lightbox img {
+      max-width: 92vw;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      cursor: zoom-out;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      border: 1px solid var(--detail-border);
+      border-radius: 50%;
+      background: var(--detail-card);
+      color: white;
+      font-size: 28px;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+    }
+
+    .image-lightbox p {
+      color: white;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 900px) {
+      .project-detail {
+        padding: 35px 25px 70px;
+      }
+
+      .detail-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .project-detail {
+        padding: 25px 18px 60px;
+      }
+
+      .project-hero {
+        padding: 28px 22px;
+      }
+
+      .project-hero h1 {
+        font-size: 36px;
+      }
+
+      .detail-grid,
+      .visual-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .pipeline-step {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .dataset-source {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="project-detail">
+
+    <!-- BACK -->
+    <a href="../index.html#projects" class="back-link">
+      ← Back to Projects
+    </a>
+
+
+    <!-- HERO -->
+    <header class="project-hero">
+
+      <p class="project-label">
+        DATA ANALYTICS · MARKETING ANALYTICS
+      </p>
+
+      <h1>
+        Customer &amp; Marketing <span>Analytics</span>
+      </h1>
+
+      <p class="project-intro">
+        Project analisis customer dan performa marketing campaign
+        menggunakan Microsoft Excel untuk memahami customer behavior,
+        purchasing patterns, product spending, purchase channels,
+        customer segmentation, serta respons customer terhadap
+        marketing campaign.
+      </p>
+
+      <div class="project-tags">
+        <span>Microsoft Excel</span>
+        <span>PivotTable</span>
+        <span>PivotChart</span>
+        <span>Slicer</span>
+        <span>Data Analysis</span>
+      </div>
+
+    </header>
+
+
+    <!-- PROJECT OVERVIEW -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>01 / PROJECT OVERVIEW</p>
+        <h2>Project Overview</h2>
+      </div>
+
+      <p class="detail-text">
+        Customer &amp; Marketing Analytics adalah project analisis
+        customer dan performa marketing campaign menggunakan
+        Microsoft Excel.
+        <br><br>
+        Project ini bertujuan untuk memahami customer behavior,
+        purchasing patterns, product spending, purchase channels,
+        customer segmentation, serta respons customer terhadap
+        marketing campaign.
+      </p>
+
+      <!-- DATASET SOURCE -->
+      <div class="dataset-source">
+
+        <div>
+
+          <span>DATASET SOURCE</span>
+
+          <h3>
+            Customer & Marketing Analysis Dataset
+          </h3>
+
+          <p>
+            Dataset berisi informasi mengenai customer demographics,
+            income, product spending, purchase behavior,
+            purchase channels, dan marketing campaign acceptance.
+          </p>
+
+        </div>
+
+        <a
+          href="../project-assets/Marketing Campaign & Customer Value Analysis Dashboard — Microsoft Excel/marketing_campaign.csv"
+          download
+          class="dataset-button"
+        >
+          View Dataset
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- OBJECTIVE -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>02 / OBJECTIVE</p>
+        <h2>Project Objective</h2>
+      </div>
+
+      <p class="detail-text">
+        Menganalisis data customer untuk mendapatkan insight terkait
+        karakteristik dan segmentasi customer, pola spending,
+        produk dengan kontribusi spending terbesar, purchase channel,
+        performa marketing campaign, serta customer response
+        terhadap marketing campaign.
+      </p>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+          <h3>Customer Analysis</h3>
+          <p>
+            Memahami karakteristik, distribusi, dan segmentasi customer.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Spending Analysis</h3>
+          <p>
+            Menganalisis pola spending berdasarkan karakteristik customer
+            dan kategori produk.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Campaign Analysis</h3>
+          <p>
+            Mengevaluasi performa campaign dan respons customer
+            terhadap marketing campaign.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DATASET -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>03 / DATASET</p>
+        <h2>Dataset</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <span class="dataset-number">2,232</span>
+
+          <span class="dataset-label">
+            Customers
+          </span>
+
+          <p class="dataset-note">
+            Customer records setelah proses data cleaning.
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <span class="dataset-number">29</span>
+
+          <span class="dataset-label">
+            Columns
+          </span>
+
+          <p class="dataset-note">
+            Atribut customer, spending, purchasing behavior,
+            dan campaign response.
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>
+            Customer Personality Analysis
+          </h3>
+
+          <p>
+            Dataset mencakup customer demographics,
+            income dan household information,
+            product spending, purchase behavior,
+            purchase channels, serta marketing campaign acceptance.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DATA PROCESSING -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>04 / DATA PROCESSING</p>
+        <h2>Data Processing Workflow</h2>
+      </div>
+
+      <div class="pipeline">
+
+        <div class="pipeline-step">
+          <span>STEP 01</span>
+          <strong>Data Understanding</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 02</span>
+          <strong>Data Cleaning</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 03</span>
+          <strong>Feature Engineering</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 04</span>
+          <strong>PivotTable Analysis</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 05</span>
+          <strong>Data Visualization</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 06</span>
+          <strong>Interactive Dashboard</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DATA CLEANING -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>05 / DATA CLEANING</p>
+        <h2>Data Cleaning</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <h3>Data Quality</h3>
+
+          <ul>
+            <li>Duplicate checking</li>
+            <li>Data type validation</li>
+            <li>Data consistency checking</li>
+          </ul>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>Missing &amp; Outliers</h3>
+
+          <ul>
+            <li>Missing income treatment using median</li>
+            <li>Income outlier detection and removal</li>
+            <li>Invalid birth year treatment</li>
+          </ul>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>Standardization</h3>
+
+          <ul>
+            <li>Date format standardization</li>
+            <li>Marital status standardization</li>
+            <li>Final data validation</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FEATURE ENGINEERING -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>06 / FEATURE ENGINEERING</p>
+        <h2>Feature Engineering</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+          <h3>Customer Attributes</h3>
+          <p>
+            Age<br>
+            Age Group
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Purchase Metrics</h3>
+          <p>
+            Total Spending<br>
+            Total Purchases
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Campaign Response</h3>
+          <p>
+            Campaign Accepted<br>
+            Response Status
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ANALYSIS -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>07 / ANALYSIS</p>
+        <h2>Customer &amp; Marketing Analysis</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <h3>Customer Analysis</h3>
+
+          <ul>
+            <li>Customer distribution by age group</li>
+            <li>Spending by age group</li>
+            <li>Spending by marital status</li>
+            <li>Customer segmentation</li>
+          </ul>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>Product &amp; Purchase Analysis</h3>
+
+          <ul>
+            <li>Spending by product category</li>
+            <li>Purchase channel performance</li>
+            <li>Purchase behavior comparison</li>
+          </ul>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>Marketing Campaign Analysis</h3>
+
+          <ul>
+            <li>Campaign performance</li>
+            <li>Campaign acceptance by campaign</li>
+            <li>Response rate by education</li>
+            <li>Customer response analysis</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- KEY FINDINGS -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>08 / KEY FINDINGS</p>
+        <h2>Key Findings</h2>
+      </div>
+
+      <div class="findings-list">
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            01
+          </div>
+
+          <p>
+            Customer berusia 40–49 tahun merupakan kelompok customer
+            terbesar dengan <strong>653 customers</strong>.
+          </p>
+
+        </div>
+
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            02
+          </div>
+
+          <p>
+            Kelompok usia 40–49 tahun menghasilkan total spending
+            tertinggi, yaitu sekitar <strong>374,929</strong>.
+          </p>
+
+        </div>
+
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            03
+          </div>
+
+          <p>
+            MntWines merupakan kategori produk dengan total spending
+            terbesar, mencapai sekitar <strong>678,674</strong>.
+          </p>
+
+        </div>
+
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            04
+          </div>
+
+          <p>
+            Store merupakan purchase channel dengan jumlah pembelian
+            tertinggi dibandingkan Web, Catalog, dan Deals.
+          </p>
+
+        </div>
+
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            05
+          </div>
+
+          <p>
+            Overall response rate terhadap marketing campaign terakhir
+            mencapai <strong>14.87%</strong>.
+          </p>
+
+        </div>
+
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            06
+          </div>
+
+          <p>
+            Customer dengan pendidikan PhD memiliki response rate
+            tertinggi dibandingkan kelompok pendidikan lainnya.
+          </p>
+
+        </div>
+
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            07
+          </div>
+
+          <p>
+            Campaign 4 memiliki jumlah acceptance tertinggi,
+            sedangkan Campaign 2 memiliki acceptance terendah.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>09 / DASHBOARD</p>
+        <h2>Interactive Excel Dashboard</h2>
+      </div>
+
+      <div class="visual-grid">
+
+        <div class="visual-card visual-card-wide">
+
+          <div class="visual-image">
+
+            <img
+              src="../project-assets/Marketing Campaign & Customer Value Analysis Dashboard — Microsoft Excel/dashboard.png"
+              alt="Customer and Marketing Analytics Excel Dashboard"
+            >
+
+          </div>
+
+          <div class="visual-caption">
+
+            <strong>
+              Customer &amp; Marketing Analytics Dashboard
+            </strong>
+
+            <p>
+              Interactive Excel dashboard yang mencakup KPI Cards,
+              Customer Analysis, Spending Analysis, Purchase Channel
+              Analysis, Campaign Performance, Customer Segmentation,
+              dan PivotCharts.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- INTERACTIVE FEATURES -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>10 / INTERACTIVE FEATURES</p>
+        <h2>Interactive Dashboard Features</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <h3>Education</h3>
+
+          <p>
+            Slicer digunakan untuk memfilter dashboard berdasarkan
+            tingkat pendidikan customer.
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>Age Group</h3>
+
+          <p>
+            Dashboard dapat difilter berdasarkan kelompok usia
+            customer untuk melihat perubahan KPI dan visualisasi.
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>Marital Status</h3>
+
+          <p>
+            Slicer memungkinkan analisis berdasarkan status
+            pernikahan customer.
+          </p>
+
+        </div>
+
+      </div>
+
+      <p class="detail-text" style="margin-top: 25px;">
+        Slicer dapat digunakan untuk memfilter data dan memperbarui
+        KPI serta visualisasi dashboard secara dinamis.
+      </p>
+
+    </section>
+
+
+    <!-- TOOLS -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>11 / TOOLS &amp; SKILLS</p>
+        <h2>Tools &amp; Technologies</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <h3>Microsoft Excel</h3>
+
+          <p>
+            PivotTable · PivotChart · Slicer · Excel Formulas
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>Data Analysis</h3>
+
+          <p>
+            Data Cleaning · Feature Engineering · Exploratory Data Analysis
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>Analytics</h3>
+
+          <p>
+            Customer Analytics · Marketing Analytics · Data Visualization
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- GITHUB -->
+    <section class="detail-section">
+
+      <div class="github-panel">
+
+        <p class="project-label">
+          EXPLORE THE PROJECT
+        </p>
+
+        <h3>
+          Lihat detail pengerjaan di GitHub
+        </h3>
+
+        <p>
+          Source file, proses analisis, data preparation,
+          PivotTable, PivotChart, dan dashboard tersedia
+          di repository GitHub.
+        </p>
+
+        <a
+          href="https://github.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="github-button"
+        >
+          View Repository
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- BOTTOM BACK -->
+    <div class="bottom-back">
+
+      <a href="../index.html#projects" class="back-link">
+        ← Back to Projects
+      </a>
+
+    </div>
+
+  </main>
+
+
+  <!-- IMAGE LIGHTBOX -->
+
+  <div id="imageLightbox" class="image-lightbox">
+
+    <button
+      class="lightbox-close"
+      id="closeLightbox"
+      aria-label="Close image"
+    >
+      ×
+    </button>
+
+    <img
+      id="lightboxImage"
+      src=""
+      alt="Full size visualization"
+    >
+
+    <p id="lightboxCaption"></p>
+
+  </div>
+
+
+  <script>
+
+    const lightbox =
+      document.getElementById("imageLightbox");
+
+    const lightboxImage =
+      document.getElementById("lightboxImage");
+
+    const lightboxCaption =
+      document.getElementById("lightboxCaption");
+
+
+    document
+      .querySelectorAll(".visual-card .visual-image img")
+      .forEach((img) => {
+
+        img.addEventListener("click", () => {
+
+          lightboxImage.src = img.src;
+          lightboxImage.alt = img.alt;
+
+          const caption =
+            img
+              .closest(".visual-card")
+              .querySelector(".visual-caption strong");
+
+          lightboxCaption.textContent =
+            caption
+              ? caption.textContent
+              : img.alt;
+
+          lightbox.classList.add("active");
+
+          document.body.style.overflow = "hidden";
+
+        });
+
+      });
+
+
+    function closeImageLightbox() {
+
+      lightbox.classList.remove("active");
+
+      document.body.style.overflow = "";
+
+    }
+
+
+    document
+      .getElementById("closeLightbox")
+      .addEventListener(
+        "click",
+        closeImageLightbox
+      );
+
+
+    lightbox.addEventListener("click", (event) => {
+
+      if (
+        event.target === lightbox ||
+        event.target === lightboxImage
+      ) {
+
+        closeImageLightbox();
+
+      }
+
+    });
+
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape") {
+
+        closeImageLightbox();
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>

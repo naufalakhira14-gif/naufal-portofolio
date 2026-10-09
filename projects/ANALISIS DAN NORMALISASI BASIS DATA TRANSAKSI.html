@@ -1,0 +1,1004 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BNPL Database Design &amp; Normalization | Naufal Portfolio</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    :root {
+      --detail-bg: #07050f;
+      --detail-card: #0d0a18;
+      --detail-border: rgba(139, 92, 246, 0.30);
+      --detail-purple: #8b5cf6;
+      --detail-purple-light: #a78bfa;
+      --detail-text: #cfc7df;
+    }
+
+    body {
+      background: var(--detail-bg);
+    }
+
+    .project-detail {
+      width: 100%;
+      padding: 45px 48px 90px;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--detail-text);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 30px;
+      transition: .3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--detail-purple-light);
+    }
+
+    .project-hero {
+      padding: 42px;
+      margin-bottom: 65px;
+      border: 1px solid var(--detail-border);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at top right, rgba(139,92,246,.14), transparent 40%),
+        var(--detail-card);
+    }
+
+    .project-label {
+      color: var(--detail-purple-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .project-hero h1 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.1;
+    }
+
+    .project-hero h1 span {
+      color: var(--detail-purple-light);
+    }
+
+    .project-intro {
+      max-width: 950px;
+      margin: 22px 0 25px;
+      color: var(--detail-text);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .project-tags span {
+      padding: 8px 13px;
+      border: 1px solid var(--detail-border);
+      border-radius: 999px;
+      color: var(--detail-text);
+      font-size: 12px;
+      background: rgba(139,92,246,.05);
+    }
+
+    .detail-section {
+      margin-bottom: 70px;
+    }
+
+    .detail-heading {
+      margin-bottom: 24px;
+    }
+
+    .detail-heading p {
+      margin: 0 0 8px;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .detail-heading h2 {
+      margin: 0;
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .detail-text {
+      max-width: 1050px;
+      color: var(--detail-text);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .detail-card {
+      min-width: 0;
+      padding: 25px;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .detail-card h3 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .detail-card p,
+    .detail-card li {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .detail-card ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .dataset-number {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .dataset-label {
+      display: block;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dataset-note {
+      margin-top: 8px;
+      color: var(--detail-text);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* NORMALIZATION PIPELINE */
+
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pipeline-step {
+      padding: 13px 16px;
+      border: 1px solid var(--detail-border);
+      border-radius: 10px;
+      background: var(--detail-card);
+      color: var(--detail-text);
+      font-size: 13px;
+    }
+
+    .pipeline-step span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+
+    .pipeline-step strong {
+      color: #fff;
+      font-size: 13px;
+    }
+
+    /* DATABASE SCHEMA */
+
+    .schema-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .schema-table {
+      overflow: hidden;
+      border: 1px solid var(--detail-border);
+      border-radius: 13px;
+      background: var(--detail-card);
+    }
+
+    .schema-table h3 {
+      margin: 0;
+      padding: 15px 18px;
+      background: rgba(139,92,246,.12);
+      border-bottom: 1px solid var(--detail-border);
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .schema-table ul {
+      margin: 0;
+      padding: 16px 18px 18px 36px;
+      color: var(--detail-text);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .schema-table li::marker {
+      color: var(--detail-purple-light);
+    }
+
+    .key-label {
+      display: inline-block;
+      margin-left: 5px;
+      padding: 2px 6px;
+      border: 1px solid var(--detail-border);
+      border-radius: 5px;
+      color: var(--detail-purple-light);
+      font-size: 10px;
+    }
+
+    /* VISUALIZATION */
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .visual-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .visual-card-wide {
+      grid-column: 1 / -1;
+      width: 85%;
+      justify-self: center;
+    }
+
+    .visual-placeholder {
+      min-height: 260px;
+      padding: 30px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(circle, rgba(139,92,246,.10), transparent 65%);
+    }
+
+    .visual-placeholder span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .visual-placeholder strong {
+      display: block;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .visual-placeholder p {
+      margin: 8px 0 0;
+      color: var(--detail-text);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .visual-image {
+      width: 100%;
+      height: 300px;
+      padding: 12px;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0b0815;
+    }
+
+    .visual-image img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      border-radius: 6px;
+      cursor: zoom-in;
+      transition: transform .25s ease;
+    }
+
+    .visual-image img:hover {
+      transform: scale(1.025);
+    }
+
+    .visual-caption {
+      padding: 16px 18px 19px;
+    }
+
+    .visual-caption strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .visual-caption p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* FINDINGS */
+
+    .findings-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .finding-item {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 15px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--detail-border);
+      border-radius: 12px;
+      background: var(--detail-card);
+    }
+
+    .finding-number {
+      color: var(--detail-purple-light);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .finding-item p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* GITHUB */
+
+    .github-panel {
+      padding: 30px;
+      border: 1px solid var(--detail-border);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at top right, rgba(139,92,246,.12), transparent 45%),
+        var(--detail-card);
+    }
+
+    .github-panel h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .github-panel p {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 11px 18px;
+      border-radius: 9px;
+      background: var(--detail-purple);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .3s ease;
+    }
+
+    .github-button:hover {
+      background: var(--detail-purple-light);
+      color: #08050f;
+    }
+
+    .bottom-back {
+      margin-top: 40px;
+    }
+
+    /* IMAGE LIGHTBOX */
+
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      box-sizing: border-box;
+      background: rgba(4,2,10,.96);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    .image-lightbox.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .image-lightbox img {
+      max-width: 92vw;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      cursor: zoom-out;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      border: 1px solid var(--detail-border);
+      border-radius: 50%;
+      background: var(--detail-card);
+      color: white;
+      font-size: 28px;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+    }
+
+    .image-lightbox p {
+      color: white;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 900px) {
+      .project-detail {
+        padding: 35px 25px 70px;
+      }
+
+      .detail-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .visual-card-wide {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .project-detail {
+        padding: 25px 18px 60px;
+      }
+
+      .project-hero {
+        padding: 28px 22px;
+      }
+
+      .project-hero h1 {
+        font-size: 36px;
+      }
+
+      .detail-grid,
+      .visual-grid,
+      .schema-list {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-card-wide {
+        grid-column: auto;
+      }
+
+      .pipeline {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .visual-image {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<main class="project-detail">
+
+  <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+
+  <!-- HERO -->
+  <header class="project-hero">
+    <p class="project-label">DATABASE DESIGN · FINTECH</p>
+
+    <h1>BNPL Database <span>Design &amp; Normalization</span></h1>
+
+    <p class="project-intro">
+      A database design project focused on Buy Now Pay Later (BNPL)
+      transactions in the Financial Technology (FinTech) industry.
+      The project transforms an unnormalized transaction dataset into
+      a structured relational database through normalization from UNF
+      to Third Normal Form (3NF), aiming to reduce data redundancy
+      and improve data consistency.
+    </p>
+
+    <div class="project-tags">
+      <span>SQL</span>
+      <span>ERD</span>
+      <span>Database Normalization</span>
+    </div>
+  </header>
+
+  <!-- OVERVIEW -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>01 / PROJECT OVERVIEW</p>
+      <h2>Project Overview</h2>
+    </div>
+
+    <p class="detail-text">
+      This project focuses on designing a relational database for
+      Buy Now Pay Later transactions. The initial transaction data
+      is analyzed and normalized from Unnormalized Form (UNF) to
+      Third Normal Form (3NF). The resulting database separates
+      user, product, BNPL plan, transaction, and installment details
+      into related tables to improve data organization and consistency.
+    </p>
+  </section>
+
+  <!-- OBJECTIVE -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>02 / OBJECTIVE</p>
+      <h2>Project Objective</h2>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-card">
+        <h3>Normalization</h3>
+        <p>
+          Analyze structural issues in the initial dataset and
+          normalize the data from UNF to 3NF.
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <h3>Relational Design</h3>
+        <p>
+          Define relational tables, primary keys, foreign keys,
+          and relationships between database entities.
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <h3>Installment Management</h3>
+        <p>
+          Establish a structured database to organize BNPL transactions
+          and installment payment records.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATASET -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>03 / DATASET</p>
+      <h2>BNPL Transaction Dataset</h2>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-card">
+        <span class="dataset-number">50</span>
+        <span class="dataset-label">Transactions</span>
+        <p class="dataset-note">
+          A constructed dataset of BNPL transaction records.
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <span class="dataset-number">6</span>
+        <span class="dataset-label">Main Tables</span>
+        <p class="dataset-note">
+          Relational tables created in the final database design.
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <h3>FinTech Domain</h3>
+        <p>
+          Transaction, product, BNPL provider, installment plan,
+          and repayment information.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATABASE DESIGN PROCESS -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>04 / DATABASE DESIGN PROCESS</p>
+      <h2>Normalization Pipeline</h2>
+    </div>
+
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <span>STEP 01</span>
+        <strong>Data Understanding</strong>
+      </div>
+
+      <div class="pipeline-step">
+        <span>STEP 02</span>
+        <strong>Initial UNF Analysis</strong>
+      </div>
+
+      <div class="pipeline-step">
+        <span>STEP 03</span>
+        <strong>First Normal Form (1NF)</strong>
+      </div>
+
+      <div class="pipeline-step">
+        <span>STEP 04</span>
+        <strong>Second Normal Form (2NF)</strong>
+      </div>
+
+      <div class="pipeline-step">
+        <span>STEP 05</span>
+        <strong>Third Normal Form (3NF)</strong>
+      </div>
+
+      <div class="pipeline-step">
+        <span>STEP 06</span>
+        <strong>Relational Schema</strong>
+      </div>
+
+      <div class="pipeline-step">
+        <span>STEP 07</span>
+        <strong>ERD Design</strong>
+      </div>
+
+      <div class="pipeline-step">
+        <span>STEP 08</span>
+        <strong>SQL Implementation</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- NORMALIZATION -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>05 / NORMALIZATION</p>
+      <h2>From UNF to 3NF</h2>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-card">
+        <h3>Unnormalized Form (UNF)</h3>
+        <p>
+          The initial structure combines transaction information,
+          BNPL plan attributes, and installment records, creating
+          potential redundancy and data anomalies.
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <h3>First Normal Form (1NF)</h3>
+        <p>
+          Organize the data into relational structures with
+          atomic values and clearly defined records.
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <h3>Second Normal Form (2NF)</h3>
+        <p>
+          Organize attributes to address partial dependencies
+          on candidate keys where applicable.
+        </p>
+      </div>
+
+      <div class="detail-card">
+        <h3>Third Normal Form (3NF)</h3>
+        <p>
+          Separate entities and their attributes to address
+          transitive dependencies and improve consistency.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATABASE SCHEMA -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>06 / DATABASE SCHEMA</p>
+      <h2>Six Relational Tables</h2>
+    </div>
+
+    <div class="schema-list">
+
+      <div class="schema-table">
+        <h3>01. Users</h3>
+        <ul>
+          <li>UserID <span class="key-label">PK</span></li>
+          <li>UserName</li>
+          <li>Age</li>
+        </ul>
+      </div>
+
+      <div class="schema-table">
+        <h3>02. Products</h3>
+        <ul>
+          <li>Product <span class="key-label">KEY</span></li>
+        </ul>
+      </div>
+
+      <div class="schema-table">
+        <h3>03. BNPLApp</h3>
+        <ul>
+          <li>BNPLApp <span class="key-label">KEY</span></li>
+        </ul>
+      </div>
+
+      <div class="schema-table">
+        <h3>04. BNPLPlans</h3>
+        <ul>
+          <li>PlanID <span class="key-label">PK</span></li>
+          <li>BNPLApp <span class="key-label">FK</span></li>
+          <li>Tenor</li>
+          <li>Promo</li>
+          <li>InterestPct</li>
+          <li>Fee</li>
+        </ul>
+      </div>
+
+      <div class="schema-table">
+        <h3>05. Transaksi</h3>
+        <ul>
+          <li>TxnID <span class="key-label">PK</span></li>
+          <li>UserID <span class="key-label">FK</span></li>
+          <li>Product <span class="key-label">FK</span></li>
+          <li>TxnDate</li>
+          <li>TotalPayable</li>
+          <li>PlanID <span class="key-label">FK</span></li>
+        </ul>
+      </div>
+
+      <div class="schema-table">
+        <h3>06. CicilanDetail</h3>
+        <ul>
+          <li>TxnID <span class="key-label">FK</span></li>
+          <li>Bulan</li>
+          <li>DueDate</li>
+          <li>Amount</li>
+          <li>Status</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="detail-text">
+      Primary keys and foreign-key references connect the main entities.
+      Check the final SQL schema and ERD for the exact key definitions
+      and relationship cardinalities implemented in the database.
+    </p>
+  </section>
+
+  <!-- DATABASE VISUALIZATION -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>07 / DATABASE DESIGN &amp; VISUALIZATION</p>
+      <h2>Database Implementation</h2>
+    </div>
+
+    <div class="visual-grid">
+
+      <!-- Replace this placeholder with your final ERD screenshot -->
+      
+<!-- FINAL ERD -->
+<div class="visual-card visual-card-wide">
+  <div class="visual-image">
+    <img
+      src="../project-assets/ANALISIS DAN NORMALISASI BASIS DATA TRANSAKSI/erd.png"
+      alt="Final Entity Relationship Diagram"
+    >
+  </div>
+
+  <div class="visual-caption">
+    <strong>Final ERD</strong>
+    <p>
+      Overview of the relational schema, primary keys,
+      foreign keys, and relationships between entities.
+    </p>
+  </div>
+</div>
+
+
+    </div>
+  </section>
+
+  <!-- KEY FINDINGS -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>08 / KEY FINDINGS</p>
+      <h2>Key Findings</h2>
+    </div>
+
+    <div class="findings-list">
+
+      <div class="finding-item">
+        <div class="finding-number">01</div>
+        <p>
+          The initial UNF structure combines transaction details,
+          BNPL plan attributes, and installment records, creating
+          potential data redundancy and anomalies.
+        </p>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-number">02</div>
+        <p>
+          Normalization from UNF to 3NF organizes the data into six
+          main tables: Users, Products, BNPLApp, BNPLPlans,
+          Transaksi, and CicilanDetail.
+        </p>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-number">03</div>
+        <p>
+          Primary keys and relational references define the connections
+          between users, transactions, products, BNPL plans,
+          and installment payments.
+        </p>
+      </div>
+
+      <div class="finding-item">
+        <div class="finding-number">04</div>
+        <p>
+          The resulting database design provides a structured
+          foundation for installment management and future analysis
+          of overdue payments and repayment behavior.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>09 / TOOLS &amp; SKILLS</p>
+      <h2>Tools &amp; Technologies</h2>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-card">
+        <h3>Database</h3>
+        <p>SQL</p>
+      </div>
+
+      <div class="detail-card">
+        <h3>Database Design</h3>
+        <p>ERD · Relational Schema · Primary Keys · Foreign Keys</p>
+      </div>
+
+      <div class="detail-card">
+        <h3>Data Organization</h3>
+        <p>UNF · 1NF · 2NF · 3NF · Database Normalization</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GITHUB -->
+  <section class="detail-section">
+    <div class="github-panel">
+      <p class="project-label">EXPLORE THE PROJECT</p>
+      <h3>Explore the Database Project</h3>
+      <p>
+        View the SQL implementation, database structure,
+        and project documentation in the repository.
+      </p>
+
+      <!-- Replace the URL below with your actual GitHub repository -->
+      <a
+        href="https://github.com/naufalakhira14-gif/ANALISIS-DAN-NORMALISASI-BASIS-DATA-TRANSAKSI"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="github-button"
+      >
+        View Repository
+      </a>
+    </div>
+  </section>
+
+  <div class="bottom-back">
+    <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+  </div>
+
+</main>
+
+<!-- IMAGE LIGHTBOX -->
+<div id="imageLightbox" class="image-lightbox">
+  <button class="lightbox-close" id="closeLightbox" aria-label="Close image">×</button>
+  <img id="lightboxImage" src="" alt="Full size database visualization">
+  <p id="lightboxCaption"></p>
+</div>
+
+<script>
+  const lightbox = document.getElementById("imageLightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxCaption = document.getElementById("lightboxCaption");
+
+  document.querySelectorAll(".visual-image img").forEach((img) => {
+    img.addEventListener("click", () => {
+      if (!img.complete || img.naturalWidth === 0) return;
+
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt;
+
+      const caption = img.closest(".visual-card")
+        .querySelector(".visual-caption strong");
+
+      lightboxCaption.textContent = caption
+        ? caption.textContent
+        : img.alt;
+
+      lightbox.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  function closeImageLightbox() {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  document.getElementById("closeLightbox")
+    .addEventListener("click", closeImageLightbox);
+
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox || event.target === lightboxImage) {
+      closeImageLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeImageLightbox();
+    }
+  });
+</script>
+
+</body>
+</html>

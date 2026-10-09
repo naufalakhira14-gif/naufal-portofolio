@@ -1,0 +1,1097 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Indonesia E-Commerce Analytics | Naufal Akhira</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        :root {
+            --detail-bg: #07050f;
+            --detail-card: #0d0a18;
+            --detail-border: rgba(139, 92, 246, 0.30);
+            --detail-purple: #8b5cf6;
+            --detail-purple-light: #a78bfa;
+            --detail-text: #cfc7df;
+        }
+
+        body {
+            background: var(--detail-bg);
+            color: #ffffff;
+        }
+
+        .project-detail {
+            width: 100%;
+            padding: 45px 48px 90px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 38px;
+            color: var(--detail-text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--detail-purple-light);
+        }
+
+        .project-hero {
+            padding: 42px;
+            margin-bottom: 65px;
+            border: 1px solid var(--detail-border);
+            border-radius: 20px;
+            background:
+                radial-gradient(
+                    ellipse at top right,
+                    rgba(139, 92, 246, 0.13),
+                    transparent 55%
+                ),
+                var(--detail-card);
+        }
+
+        .project-label {
+            margin-bottom: 18px;
+            color: var(--detail-purple-light);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .project-hero h1 {
+            max-width: 850px;
+            margin-bottom: 22px;
+            font-size: clamp(34px, 5vw, 58px);
+            line-height: 1.15;
+        }
+
+        .project-hero h1 span {
+            color: var(--detail-purple-light);
+        }
+
+        .project-intro {
+            max-width: 850px;
+            margin-bottom: 28px;
+            color: var(--detail-text);
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .project-tags span {
+            padding: 8px 13px;
+            border: 1px solid var(--detail-border);
+            border-radius: 6px;
+            color: var(--detail-purple-light);
+            font-size: 13px;
+        }
+
+        .detail-section {
+            margin-bottom: 75px;
+            scroll-margin-top: 30px;
+        }
+
+        .detail-heading {
+            margin-bottom: 28px;
+        }
+
+        .detail-heading p {
+            margin-bottom: 12px;
+            color: var(--detail-purple-light);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .detail-heading h2 {
+            font-size: clamp(28px, 4vw, 38px);
+            line-height: 1.25;
+        }
+
+        .detail-text {
+            max-width: 950px;
+            color: var(--detail-text);
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .detail-text p {
+            margin-bottom: 18px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .detail-card {
+            padding: 26px;
+            border: 1px solid var(--detail-border);
+            border-radius: 14px;
+            background: var(--detail-card);
+        }
+
+        .detail-card h3 {
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .detail-card p,
+        .detail-card li {
+            color: var(--detail-text);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .detail-card ul {
+            padding-left: 19px;
+        }
+
+        .dataset-number {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--detail-purple-light);
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .dataset-label {
+            color: var(--detail-text);
+            font-size: 14px;
+        }
+
+        .dataset-note {
+            margin-top: 20px;
+            padding: 24px;
+            border-left: 3px solid var(--detail-purple);
+            border-radius: 0 10px 10px 0;
+            background: rgba(139, 92, 246, 0.07);
+            color: var(--detail-text);
+            line-height: 1.9;
+        }
+
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .pipeline-step {
+            position: relative;
+            padding: 22px 16px;
+            border: 1px solid var(--detail-border);
+            border-radius: 12px;
+            background: var(--detail-card);
+            text-align: center;
+        }
+
+        .pipeline-step span {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--detail-purple-light);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pipeline-step strong {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .visual-card {
+            overflow: hidden;
+            border: 1px solid var(--detail-border);
+            border-radius: 14px;
+            background: var(--detail-card);
+        }
+
+        .visual-placeholder {
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 30px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(139, 92, 246, 0.09),
+                    transparent
+                );
+            text-align: center;
+        }
+
+        .visual-placeholder span {
+            color: var(--detail-purple-light);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .visual-placeholder strong {
+            font-size: 17px;
+        }
+
+        .visual-placeholder p {
+            max-width: 320px;
+            color: var(--detail-text);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .visual-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .visual-caption {
+            padding: 20px 22px;
+        }
+
+        .visual-caption h3 {
+            margin-bottom: 8px;
+            font-size: 17px;
+        }
+
+        .visual-caption p {
+            color: var(--detail-text);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .findings-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .finding-item {
+            display: grid;
+            grid-template-columns: 38px 1fr;
+            gap: 16px;
+            padding: 20px;
+            border: 1px solid var(--detail-border);
+            border-radius: 12px;
+            background: var(--detail-card);
+        }
+
+        .finding-number {
+            color: var(--detail-purple-light);
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .finding-item p {
+            color: var(--detail-text);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .github-panel {
+            padding: 36px;
+            border: 1px solid var(--detail-border);
+            border-radius: 16px;
+            background:
+                radial-gradient(
+                    ellipse at top right,
+                    rgba(139, 92, 246, 0.12),
+                    transparent 60%
+                ),
+                var(--detail-card);
+        }
+
+        .github-panel h3 {
+            margin-bottom: 14px;
+            font-size: 24px;
+        }
+
+        .github-panel p {
+            max-width: 700px;
+            margin-bottom: 24px;
+            color: var(--detail-text);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .github-button {
+            display: inline-block;
+            padding: 13px 20px;
+            border: 1px solid var(--detail-purple);
+            border-radius: 7px;
+            background: var(--detail-purple);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.2s ease;
+        }
+
+        .github-button:hover {
+            background: transparent;
+            color: var(--detail-purple-light);
+        }
+
+        .bottom-back {
+            display: inline-block;
+            margin-top: 35px;
+            color: var(--detail-purple-light);
+            text-decoration: none;
+        }
+
+        @media (max-width: 900px) {
+            .detail-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .pipeline {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .project-detail {
+                padding: 28px 20px 60px;
+            }
+
+            .project-hero {
+                padding: 25px;
+                margin-bottom: 48px;
+            }
+
+            .detail-section {
+                margin-bottom: 55px;
+            }
+
+            .detail-grid,
+            .visual-grid,
+            .pipeline {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-card {
+                padding: 22px;
+            }
+
+            .visual-placeholder {
+                min-height: 200px;
+            }
+
+            .github-panel {
+                padding: 25px;
+            }
+        }
+        
+        /* Preview gambar visualisasi */
+        .visual-card .visual-image {
+        height: 260px;
+        overflow: hidden;
+        background: #0b0815;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .visual-card .visual-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        cursor: zoom-in;
+        transition: filter 0.3s ease;
+        }
+
+        .visual-card .visual-image img:hover {
+        filter: brightness(1.1);
+        }
+
+        /* Tampilan gambar ukuran penuh */
+        .image-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        box-sizing: border-box;
+        background: rgba(4, 2, 10, 0.96);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: 0.25s ease;
+        }
+
+        .image-lightbox.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        }
+
+        .image-lightbox img {
+        max-width: 92vw;
+        max-height: 82vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 10px;
+        cursor: zoom-out;
+        }
+
+        .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 28px;
+        border: 1px solid var(--detail-border);
+        border-radius: 50%;
+        background: var(--detail-card);
+        color: white;
+        font-size: 28px;
+        width: 42px;
+        height: 42px;
+        cursor: pointer;
+        }
+
+        .image-lightbox p {
+        color: white;
+        text-align: center;
+        margin-top: 15px;
+        }
+
+    </style>
+</head>
+
+
+<!-- IMAGE LIGHTBOX -->
+<div id="imageLightbox" class="image-lightbox">
+  <button
+    class="lightbox-close"
+    id="closeLightbox"
+    aria-label="Close image"
+  >×</button>
+
+  <img id="lightboxImage" src="" alt="Full size visualization">
+  <p id="lightboxCaption"></p>
+</div>
+
+<script>
+  const lightbox = document.getElementById("imageLightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxCaption = document.getElementById("lightboxCaption");
+
+  document.querySelectorAll(".visual-card .visual-image img")
+    .forEach((img) => {
+      img.addEventListener("click", () => {
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt;
+
+        const caption = img.closest(".visual-card")
+          .querySelector(".visual-caption strong");
+
+        lightboxCaption.textContent = caption
+          ? caption.textContent
+          : img.alt;
+
+        lightbox.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+  function closeImageLightbox() {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  document.getElementById("closeLightbox")
+    .addEventListener("click", closeImageLightbox);
+
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox || event.target === lightboxImage) {
+      closeImageLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeImageLightbox();
+    }
+  });
+</script>
+</body>
+</html>
+
+
+<body>
+
+<main class="project-detail">
+
+    <a class="back-link" href="../index.html#projects">
+        ← Kembali ke Projects
+    </a>
+
+    <!-- PROJECT HEADER -->
+    <header class="project-hero">
+        <p class="project-label">Featured Project · 01</p>
+
+        <h1>
+            Indonesia E-Commerce
+            <span>Sales & Logistics Analytics</span>
+        </h1>
+
+        <p class="project-intro">
+            Proyek analisis data end-to-end yang mengolah lebih dari
+            20 ribu transaksi e-commerce Indonesia untuk memahami
+            performa penjualan, kategori produk, metode pembayaran,
+            pengiriman, pembatalan pesanan, dan pengembalian barang.
+            Hasil analisis disajikan melalui dashboard Power BI interaktif.
+        </p>
+
+        <div class="project-tags">
+            <span>Python</span>
+            <span>Pandas</span>
+            <span>Data Cleaning</span>
+            <span>EDA</span>
+            <span>Power BI</span>
+        </div>
+    </header>
+
+    <!-- PROJECT OVERVIEW -->
+    <section class="detail-section">
+        <div class="detail-heading">
+            <p>01 / OVERVIEW</p>
+            <h2>Project Overview</h2>
+        </div>
+
+        <div class="detail-text">
+            <p>
+                Proyek ini berfokus pada pengolahan dan analisis data
+                transaksi e-commerce untuk menghasilkan informasi yang
+                dapat membantu memahami kondisi bisnis secara lebih jelas.
+            </p>
+
+            <p>
+                Prosesnya mencakup pemahaman data mentah, pembersihan,
+                validasi, exploratory data analysis (EDA), analisis bisnis,
+                hingga penyajian hasil dalam dashboard Power BI.
+            </p>
+            <div class="dataset-source">
+                <div>
+                    <span>DATASET SOURCE</span>
+                    <h3>Indonesia E-Commerce Sales &amp; Shipping 2023–2025</h3>
+                    <p>
+                        Dataset transaksi e-commerce Indonesia yang digunakan
+                        sebagai sumber utama analisis.
+                    </p>
+                </div>
+
+                <a
+                    href="https://www.kaggle.com/datasets/bakitacos/indonesia-e-commerce-sales-and-shipping-20232025"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="dataset-button"
+                >
+                    View Dataset 
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- OBJECTIVES -->
+    <section class="detail-section">
+        <div class="detail-heading">
+            <p>02 / OBJECTIVES</p>
+            <h2>Tujuan Analisis</h2>
+        </div>
+
+        <div class="detail-grid">
+            <article class="detail-card">
+                <h3>Penjualan & Pesanan</h3>
+                <p>
+                    Menganalisis performa transaksi dan pesanan untuk
+                    memahami gambaran umum aktivitas e-commerce.
+                </p>
+            </article>
+
+            <article class="detail-card">
+                <h3>Produk & Kategori</h3>
+                <p>
+                    Mengidentifikasi kategori produk dan pola permintaan
+                    berdasarkan data transaksi.
+                </p>
+            </article>
+
+            <article class="detail-card">
+                <h3>Pembayaran & Logistik</h3>
+                <p>
+                    Memahami penggunaan metode pembayaran, opsi
+                    pengiriman, serta distribusi pesanan berdasarkan wilayah.
+                </p>
+            </article>
+
+            <article class="detail-card">
+                <h3>Pembatalan & Retur</h3>
+                <p>
+                    Menganalisis status pesanan, pembatalan, dan
+                    pengembalian barang untuk memantau operasional.
+                </p>
+            </article>
+
+            <article class="detail-card">
+                <h3>Analisis Geografis</h3>
+                <p>
+                    Membandingkan distribusi pesanan dan performa transaksi
+                    berdasarkan wilayah geografis.
+                </p>
+            </article>
+
+            <article class="detail-card">
+                <h3>Dashboard Interaktif</h3>
+                <p>
+                    Menyajikan hasil analisis dalam visualisasi yang
+                    mudah dipahami dan digunakan untuk eksplorasi data.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- DATASET -->
+    <section class="detail-section">
+        <div class="detail-heading">
+            <p>03 / DATASET</p>
+            <h2>Mengenal Dataset</h2>
+        </div>
+
+        <div class="detail-grid">
+            <article class="detail-card">
+                <span class="dataset-number">20.848</span>
+                <span class="dataset-label">Baris transaksi</span>
+            </article>
+
+            <article class="detail-card">
+                <span class="dataset-number">19</span>
+                <span class="dataset-label">Kolom data mentah</span>
+            </article>
+
+            <article class="detail-card">
+                <span class="dataset-number">31</span>
+                <span class="dataset-label">Kolom data hasil pengolahan</span>
+            </article>
+        </div>
+
+        <div class="dataset-note">
+            Dataset mencakup informasi pesanan, kuantitas produk,
+            kategori, status pesanan, metode pembayaran, pengiriman,
+            lokasi geografis, nilai transaksi, diskon, pembatalan,
+            dan pengembalian barang.
+
+            Data mentah yang terdiri dari 19 kolom diolah menjadi
+            dataset dengan 31 kolom melalui proses pembersihan data
+            dan penambahan fitur untuk kebutuhan analisis.
+        </div>
+    </section>
+
+    <!-- DATA PROCESSING -->
+    <section class="detail-section">
+        <div class="detail-heading">
+            <p>04 / WORKFLOW</p>
+            <h2>Data Processing</h2>
+        </div>
+
+        <div class="pipeline">
+            <div class="pipeline-step">
+                <span>STEP 01</span>
+                <strong>Data Mentah</strong>
+            </div>
+
+            <div class="pipeline-step">
+                <span>STEP 02</span>
+                <strong>Data Understanding</strong>
+            </div>
+
+            <div class="pipeline-step">
+                <span>STEP 03</span>
+                <strong>Data Cleaning</strong>
+            </div>
+
+            <div class="pipeline-step">
+                <span>STEP 04</span>
+                <strong>Data Validation</strong>
+            </div>
+
+            <div class="pipeline-step">
+                <span>STEP 05</span>
+                <strong>Exploratory Data Analysis</strong>
+            </div>
+
+            <div class="pipeline-step">
+                <span>STEP 06</span>
+                <strong>Analisis Bisnis</strong>
+            </div>
+
+            <div class="pipeline-step">
+                <span>STEP 07</span>
+                <strong>Power BI Dashboard</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATA CLEANING -->
+    <section class="detail-section">
+        <div class="detail-heading">
+            <p>05 / PREPROCESSING</p>
+            <h2>Data Cleaning & Preparation</h2>
+        </div>
+
+        <div class="detail-grid">
+            <article class="detail-card">
+                <h3>Standardisasi Data</h3>
+                <p>
+                    Menyeragamkan nilai kategorikal dan status pesanan
+                    agar data dapat dikelompokkan secara konsisten.
+                </p>
+            </article>
+
+            <article class="detail-card">
+                <h3>Missing Values</h3>
+                <p>
+                    Memeriksa dan menangani nilai yang hilang sesuai
+                    kebutuhan masing-masing kolom.
+                </p>
+            </article>
+
+            <article class="detail-card">
+                <h3>Validasi Transaksi</h3>
+                <p>
+                    Memeriksa duplikasi baris, ID pesanan, dan
+                    konsistensi catatan transaksi.
+                </p>
+            </article>
+
+            <article class="detail-card">
+                <h3>Feature Engineering</h3>
+                <p>
+                    Menambahkan fitur untuk mendukung analisis waktu,
+                    pembatalan, pengembalian barang, dan karakteristik
+                    transaksi.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <!-- VISUALIZATION -->
+    <section class="detail-section">
+        <div class="detail-heading">
+            <p>06 / EXPLORATORY DATA ANALYSIS</p>
+            <h2>Visualisasi & Analisis</h2>
+        </div>
+
+        <div class="visual-grid">
+
+            <!-- VISUALIZATION 01 -->
+            <article class="visual-card">
+                <div class="visual-image">
+                    <img
+                        src="../project-assets/Indonesia E-Commerce Sales & Logistics Analytics/Performa Bulanan.png"
+                        alt="Visualisasi performa bulanan e-commerce"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="visual-caption">
+                    <h3>Monthly Performance</h3>
+                    <p>
+                        Analisis tren pesanan selesai dan nilai transaksi
+                        dari waktu ke waktu.
+                    </p>
+                </div>
+            </article>
+
+            <!-- VISUALIZATION 02 -->
+            <article class="visual-card">
+                <div class="visual-image">
+                    <img
+                        src="../project-assets/Indonesia E-Commerce Sales & Logistics Analytics/product & Category.png"
+                        alt="Visualisasi performa produk dan kategori"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="visual-caption">
+                    <h3>Product & Category Analysis</h3>
+                    <p>
+                        Perbandingan performa kategori produk
+                        berdasarkan data transaksi.
+                    </p>
+                </div>
+            </article>
+
+            <!-- VISUALIZATION 03 -->
+            <article class="visual-card">
+                <div class="visual-image">
+                    <img
+                        src="../project-assets/Indonesia E-Commerce Sales & Logistics Analytics/geographic.png"
+                        alt="Visualisasi distribusi pesanan berdasarkan wilayah"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="visual-caption">
+                    <h3>Geographic Analysis</h3>
+                    <p>
+                        Memahami persebaran pesanan dan kontribusi
+                        wilayah terhadap aktivitas transaksi.
+                    </p>
+                </div>
+            </article>
+
+            <!-- VISUALIZATION 04 -->
+            <article class="visual-card">
+                <div class="visual-image">
+                    <img
+                        src="../project-assets/Indonesia E-Commerce Sales & Logistics Analytics/payment.png"
+                        alt="Visualisasi metode pembayaran"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="visual-caption">
+                    <h3>Payment Analysis</h3>
+                    <p>
+                        Analisis pola penggunaan metode pembayaran
+                        dalam transaksi e-commerce.
+                    </p>
+                </div>
+            </article>
+
+            <!-- VISUALIZATION 05 -->
+            <article class="visual-card visual-card-wide">
+                <div class="visual-image">
+                    <img
+                        src="../project-assets/Indonesia E-Commerce Sales & Logistics Analytics/shipping.png"
+                        alt="Visualisasi opsi pengiriman"
+                        loading="lazy"
+                    >
+                </div>
+                <div class="visual-caption">
+                    <h3>Shipping Analysis</h3>
+                    <p>
+                        Memahami distribusi penggunaan opsi pengiriman
+                        dan pola logistik pesanan.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- KEY FINDINGS -->
+    <section class="detail-section">
+        <div class="detail-heading">
+            <p>07 / RESULTS</p>
+            <h2>Key Findings</h2>
+        </div>
+
+        <div class="findings-list">
+            <div class="finding-item">
+                <span class="finding-number">01</span>
+                <p>
+                    Sebanyak 20.848 pesanan dianalisis, dengan
+                    tingkat penyelesaian pesanan sebesar 86%.
+                </p>
+            </div>
+
+            <div class="finding-item">
+                <span class="finding-number">02</span>
+                <p>
+                    Transaksi yang selesai menghasilkan nilai transaksi
+                    sekitar Rp1,05 miliar.
+                </p>
+            </div>
+
+            <div class="finding-item">
+                <span class="finding-number">03</span>
+                <p>
+                    COD menjadi metode pembayaran dominan, dengan
+                    kontribusi lebih dari setengah total pesanan selesai.
+                </p>
+            </div>
+
+            <div class="finding-item">
+                <span class="finding-number">04</span>
+                <p>
+                    Pulau Jawa mendominasi distribusi pesanan,
+                    dengan Jawa Barat sebagai kontributor terbesar.
+                </p>
+            </div>
+
+            <div class="finding-item">
+                <span class="finding-number">05</span>
+                <p>
+                    Permintaan pengiriman terkonsentrasi pada
+                    sejumlah opsi pengiriman utama.
+                </p>
+            </div>
+
+            <div class="finding-item">
+                <span class="finding-number">06</span>
+                <p>
+                    Analisis pembatalan dan pengembalian barang
+                    membantu mengidentifikasi pola operasional
+                    yang dapat dipantau melalui dashboard.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- POWER BI DASHBOARD -->
+    <section class="detail-section">
+        <div class="detail-heading">
+            <p>08 / DASHBOARD</p>
+            <h2>Interactive Power BI Dashboard</h2>
+        </div>
+
+        <p class="detail-text" style="margin-bottom: 28px;">
+            Dashboard dirancang untuk menyajikan hasil analisis
+            transaksi dalam tampilan visual yang terstruktur.
+            Screenshot dari setiap halaman dashboard akan ditampilkan
+            di bawah ini.
+        </p>
+
+        <div class="visual-grid">
+
+            <!-- DASHBOARD PAGE 01 -->
+            <article class="visual-card">
+
+                <div class="visual-image">
+                    <img 
+                        src="../project-assets/Indonesia E-Commerce Sales & Logistics Analytics/dashboard_overview.png"
+                        alt="Executive Overview Power BI Dashboard"
+                    >
+                </div>
+
+                <div class="visual-caption">
+                    <span>DASHBOARD PAGE 01</span>
+                    <h3>Executive Overview</h3>
+                    <p>
+                        Ringkasan metrik utama dan gambaran umum
+                        performa transaksi.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- DASHBOARD PAGE 02 -->
+            <article class="visual-card">
+
+                <div class="visual-image">
+                    <img 
+                        src="../project-assets/Indonesia E-Commerce Sales & Logistics Analytics/sales_product_analysis_dashboard.png"
+                        alt="Sales and Product Analysis Power BI Dashboard"
+                    >
+                </div>
+
+                <div class="visual-caption">
+                    <span>DASHBOARD PAGE 02</span>
+                    <h3>Sales &amp; Product Analysis</h3>
+                    <p>
+                        Visualisasi performa penjualan dan
+                        karakteristik kategori produk.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <!-- DASHBOARD PAGE 03 -->
+            <article class="visual-card">
+
+                <div class="visual-image">
+                    <img 
+                        src="../project-assets/Indonesia E-Commerce Sales & Logistics Analytics/operation_analysis.png"
+                        alt="Operations Analysis Power BI Dashboard"
+                    >
+                </div>
+
+                <div class="visual-caption">
+                    <span>DASHBOARD PAGE 03</span>
+                    <h3>Operations Analysis</h3>
+                    <p>
+                        Pemantauan status pesanan, pengiriman,
+                        pembatalan, dan pengembalian barang.
+                    </p>
+                </div>
+
+            </article>
+
+        </div>
+    </section>
+
+    <!-- TOOLS -->
+    <section class="detail-section">
+        <div class="detail-heading">
+            <p>09 / TECHNOLOGY</p>
+            <h2>Tools & Technologies</h2>
+        </div>
+
+        <div class="project-tags">
+            <span>Python</span>
+            <span>Pandas</span>
+            <span>Matplotlib / Seaborn</span>
+            <span>Power BI</span>
+            <span>Excel</span>
+        </div>
+    </section>
+
+    <!-- GITHUB -->
+    <section class="detail-section">
+        <div class="github-panel">
+            <p class="project-label">Explore the Project</p>
+
+            <h3>Lihat detail pengerjaan di GitHub</h3>
+
+            <p>
+                Jelajahi notebook analisis, proses pengolahan data,
+                dan dokumentasi proyek untuk melihat bagaimana
+                data diubah menjadi insight bisnis.
+            </p>
+
+            <!-- Ganti # dengan URL repository GitHub project ini -->
+            <a
+                class="github-button"
+                href="https://github.com/naufalakhira14-gif/Indonesia-E-Commerce-Sales-Logistics-Analytics"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View Repository
+            </a>
+        </div>
+
+        <a class="bottom-back" href="../index.html#projects">
+            ← Kembali ke semua project
+        </a>
+    </section>
+
+</main>
+
+</body>
+</html>

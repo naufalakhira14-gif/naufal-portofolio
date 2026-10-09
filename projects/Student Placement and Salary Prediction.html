@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Student Placement & Salary Prediction | Naufal Portfolio</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    :root {
+      --detail-bg: #07050f;
+      --detail-card: #0d0a18;
+      --detail-border: rgba(139, 92, 246, 0.30);
+      --detail-purple: #8b5cf6;
+      --detail-purple-light: #a78bfa;
+      --detail-text: #cfc7df;
+    }
+
+    body {
+      background: var(--detail-bg);
+    }
+
+    .project-detail {
+      width: 100%;
+      padding: 45px 48px 90px;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--detail-text);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 30px;
+      transition: 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--detail-purple-light);
+    }
+
+    .project-hero {
+      padding: 42px;
+      margin-bottom: 65px;
+      border: 1px solid var(--detail-border);
+      border-radius: 20px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(139, 92, 246, 0.14),
+          transparent 40%
+        ),
+        var(--detail-card);
+    }
+
+    .project-label {
+      color: var(--detail-purple-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .project-hero h1 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.05;
+      color: #fff;
+    }
+
+    .project-hero h1 span {
+      color: var(--detail-purple-light);
+    }
+
+    .project-intro {
+      max-width: 900px;
+      margin: 22px 0 25px;
+      color: var(--detail-text);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .project-tags span {
+      padding: 8px 13px;
+      border: 1px solid var(--detail-border);
+      border-radius: 999px;
+      color: var(--detail-text);
+      font-size: 12px;
+      background: rgba(139, 92, 246, 0.05);
+    }
+
+    .detail-section {
+      margin-bottom: 70px;
+    }
+
+    .detail-heading {
+      margin-bottom: 24px;
+    }
+
+    .detail-heading p {
+      margin: 0 0 8px;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .detail-heading h2 {
+      margin: 0;
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .detail-text {
+      max-width: 950px;
+      color: var(--detail-text);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .detail-card {
+      padding: 25px;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .detail-card h3 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .detail-card p,
+    .detail-card li {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .detail-card ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .dataset-number {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .dataset-label {
+      display: block;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dataset-note {
+      margin-top: 8px;
+      color: var(--detail-text);
+      font-size: 12px;
+    }
+
+    /* DATASET SOURCE */
+
+    .dataset-source {
+      width: 100%;
+      max-width: 950px;
+      box-sizing: border-box;
+      margin-top: 28px;
+      padding: 22px 24px;
+      border: 1px solid var(--detail-border);
+      border-radius: 14px;
+      background: var(--detail-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .dataset-source > div {
+      flex: 1;
+    }
+
+    .dataset-source span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .dataset-source h3 {
+      color: #fff;
+      font-size: 16px;
+      margin: 0 0 10px;
+    }
+
+    .dataset-source p {
+      color: var(--detail-text);
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .dataset-button {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border: 1px solid var(--detail-purple);
+      border-radius: 9px;
+      color: var(--detail-purple-light);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .dataset-button:hover {
+      background: var(--detail-purple);
+      color: #fff;
+    }
+
+    /* PIPELINE */
+
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pipeline-step {
+      padding: 13px 16px;
+      border: 1px solid var(--detail-border);
+      border-radius: 10px;
+      background: var(--detail-card);
+      color: var(--detail-text);
+      font-size: 13px;
+    }
+
+    .pipeline-step span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+
+    .pipeline-step strong {
+      color: #fff;
+      font-size: 13px;
+    }
+
+    /* VISUALIZATION */
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .visual-card {
+      overflow: hidden;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .visual-card-wide {
+      grid-column: 1 / -1;
+      width: 75%;
+      justify-self: center;
+    }
+
+    .visual-placeholder {
+      min-height: 260px;
+      padding: 30px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(
+          circle,
+          rgba(139, 92, 246, 0.10),
+          transparent 65%
+        );
+    }
+
+    .visual-placeholder span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .visual-placeholder strong {
+      display: block;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .visual-placeholder p {
+      margin: 8px 0 0;
+      color: var(--detail-text);
+      font-size: 13px;
+    }
+
+    .visual-caption {
+      padding: 16px 18px 19px;
+    }
+
+    .visual-caption strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .visual-caption p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* FINDINGS */
+
+    .findings-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .finding-item {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 15px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--detail-border);
+      border-radius: 12px;
+      background: var(--detail-card);
+    }
+
+    .finding-number {
+      color: var(--detail-purple-light);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .finding-item p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* DEMO / GITHUB */
+
+    .github-panel {
+      padding: 30px;
+      border: 1px solid var(--detail-border);
+      border-radius: 16px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(139, 92, 246, 0.12),
+          transparent 45%
+        ),
+        var(--detail-card);
+    }
+
+    .github-panel h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .github-panel p {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 11px 18px;
+      border-radius: 9px;
+      background: var(--detail-purple);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .github-button:hover {
+      background: var(--detail-purple-light);
+      color: #08050f;
+    }
+
+    .bottom-back {
+      margin-top: 40px;
+    }
+
+    /* LIGHTBOX */
+
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      box-sizing: border-box;
+      background: rgba(4, 2, 10, 0.96);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: 0.25s ease;
+    }
+
+    .image-lightbox.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .image-lightbox img {
+      max-width: 92vw;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      cursor: zoom-out;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      border: 1px solid var(--detail-border);
+      border-radius: 50%;
+      background: var(--detail-card);
+      color: white;
+      font-size: 28px;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+    }
+
+    .image-lightbox p {
+      color: white;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 900px) {
+      .project-detail {
+        padding: 35px 25px 70px;
+      }
+
+      .detail-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .visual-card-wide {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .project-detail {
+        padding: 25px 18px 60px;
+      }
+
+      .project-hero {
+        padding: 28px 22px;
+      }
+
+      .project-hero h1 {
+        font-size: 36px;
+      }
+
+      .detail-grid,
+      .visual-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .pipeline-step {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .dataset-source {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="project-detail">
+
+    <!-- BACK -->
+    <a href="../index.html#projects" class="back-link">
+      ← Back to Projects
+    </a>
+
+
+    <!-- HERO -->
+    <header class="project-hero">
+
+      <p class="project-label">
+        MACHINE LEARNING · CAREER PREDICTION
+      </p>
+
+      <h1>
+        Student Placement &amp; <span>Salary Prediction</span>
+      </h1>
+
+      <p class="project-intro">
+        End-to-end machine learning project untuk memprediksi
+        status placement mahasiswa dan estimasi salary setelah
+        lulus berdasarkan faktor akademik, skill, pengalaman,
+        dan faktor personal.
+      </p>
+
+      <div class="project-tags">
+        <span>Python</span>
+        <span>Scikit-learn</span>
+        <span>Optuna</span>
+        <span>Streamlit</span>
+      </div>
+
+    </header>
+
+
+    <!-- OVERVIEW -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>01 / PROJECT OVERVIEW</p>
+        <h2>Project Overview</h2>
+      </div>
+
+      <p class="detail-text">
+        Project ini merupakan end-to-end machine learning project
+        untuk memprediksi status placement mahasiswa dan estimasi
+        salary setelah lulus berdasarkan faktor akademik, skill,
+        pengalaman, dan faktor personal.
+      </p>
+
+      <div class="dataset-source">
+
+        <div>
+
+          <span>DATASET SOURCE</span>
+
+          <h3>
+            Student Placement &amp; Salary Dataset
+          </h3>
+
+          <p>
+            Dataset berisi informasi mahasiswa yang digunakan
+            untuk placement prediction dan salary prediction.
+          </p>
+
+        </div>
+
+        <a
+          href="../project-assets/Student Placement and Salary Prediction/dataset.zip"
+          download
+          class="dataset-button"
+        >
+          View Dataset
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- OBJECTIVE -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>02 / OBJECTIVE</p>
+        <h2>Project Objective</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <h3>Placement Prediction</h3>
+
+          <p>
+            Memprediksi apakah seorang mahasiswa berhasil
+            mendapatkan placement setelah lulus.
+          </p>
+
+        </div>
+
+        <div class="detail-card">
+
+          <h3>Salary Prediction</h3>
+
+          <p>
+            Memprediksi estimasi salary mahasiswa berdasarkan
+            karakteristik dan pengalaman yang tersedia.
+          </p>
+
+        </div>
+
+        <div class="detail-card">
+
+          <h3>Model Optimization</h3>
+
+          <p>
+            Membandingkan beberapa model machine learning,
+            melakukan hyperparameter tuning, dan melakukan deployment.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DATASET -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>03 / DATASET</p>
+        <h2>Dataset</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <span class="dataset-number">5,000</span>
+
+          <span class="dataset-label">
+            Students
+          </span>
+
+          <p class="dataset-note">
+            Student records yang digunakan dalam project.
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <span class="dataset-number">25</span>
+
+          <span class="dataset-label">
+            Columns
+          </span>
+
+          <p class="dataset-note">
+            Atribut akademik, skill, pengalaman,
+            personal, placement, dan salary.
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>
+            Student Placement &amp; Salary Dataset
+          </h3>
+
+          <p>
+            Dataset digunakan untuk membangun dua task
+            machine learning: classification dan regression.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DATA PROCESSING -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>04 / DATA PROCESSING</p>
+        <h2>Data Processing Pipeline</h2>
+      </div>
+
+      <div class="pipeline">
+
+        <div class="pipeline-step">
+          <span>STEP 01</span>
+          <strong>Data Understanding</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 02</span>
+          <strong>EDA</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 03</span>
+          <strong>Data Cleaning</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 04</span>
+          <strong>Feature Engineering</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 05</span>
+          <strong>Encoding &amp; Scaling</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 06</span>
+          <strong>Model Training</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 07</span>
+          <strong>Model Evaluation</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 08</span>
+          <strong>Hyperparameter Tuning</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MACHINE LEARNING -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>05 / MACHINE LEARNING</p>
+        <h2>Model Development</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <!-- CLASSIFICATION -->
+
+        <div class="detail-card">
+
+          <h3>
+            Classification
+          </h3>
+
+          <ul>
+            <li>Logistic Regression</li>
+            <li>Decision Tree</li>
+            <li>Random Forest</li>
+          </ul>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>
+            Best Classification Model
+          </h3>
+
+          <p>
+            <strong>Logistic Regression</strong>
+          </p>
+
+          <p>
+            F1-Score:
+            <strong>0.9405</strong>
+          </p>
+
+        </div>
+
+
+        <!-- REGRESSION -->
+
+        <div class="detail-card">
+
+          <h3>
+            Regression
+          </h3>
+
+          <ul>
+            <li>Linear Regression</li>
+            <li>ElasticNet</li>
+            <li>Random Forest</li>
+          </ul>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>
+            Best Regression Model
+          </h3>
+
+          <p>
+            <strong>ElasticNet</strong>
+          </p>
+
+          <p>
+            R²:
+            <strong>0.598</strong>
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>
+            Hyperparameter Tuning
+          </h3>
+
+          <p>
+            Hyperparameter tuning dilakukan menggunakan
+            <strong>Optuna</strong> untuk mendapatkan konfigurasi
+            model yang lebih optimal.
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>
+            Model Evaluation
+          </h3>
+
+          <p>
+            Model dievaluasi berdasarkan metrik yang sesuai
+            dengan masing-masing task classification dan regression.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- VISUALIZATION -->
+<section class="detail-section">
+
+  <div class="detail-heading">
+    <p>06 / VISUALIZATION</p>
+    <h2>Model &amp; Data Visualization</h2>
+  </div>
+
+  <div class="visual-grid">
+
+    <!-- EDA / CORRELATION -->
+    <div class="visual-card">
+      <div class="visual-image">
+        <img
+          src="../project-assets/Student Placement and Salary Prediction/korelasi.png"
+          alt="Student Placement EDA and Correlation Analysis"
+          loading="lazy"
+        >
+      </div>
+      <div class="visual-caption">
+        <strong>EDA &amp; Correlation Analysis</strong>
+        <p>Eksplorasi distribusi data dan hubungan antarfitur mahasiswa.</p>
+      </div>
+    </div>
+
+    <!-- MODEL EVALUATION -->
+    <div class="visual-card">
+      <div class="visual-image">
+        <img
+          src="../project-assets/Student Placement and Salary Prediction/perbandingan model.png"
+          alt="Student Model comparison"
+          loading="lazy"
+        >
+      </div>
+      <div class="visual-caption">
+        <strong>Model Comparison</strong>
+        <p>Perbandingan model classification dan regression.</p>
+      </div>
+    </div>
+
+    <!-- CONFUSION MATRIX -->
+    <div class="visual-card">
+      <div class="visual-image">
+        <img
+          src="../project-assets/Student Placement and Salary Prediction/klasifikasi.png"
+          alt="Student Placement Prediction Tuned"
+          loading="lazy"
+        >
+      </div>
+      <div class="visual-caption">
+        <strong>Placement Prediction — Performa Model Tuned classification</strong>
+        <p>Evaluasi hasil prediksi model placement.</p>
+      </div>
+    </div>
+
+    <!-- REGRESSION PLOT -->
+    <div class="visual-card">
+      <div class="visual-image">
+        <img
+          src="../project-assets/Student Placement and Salary Prediction/regresi.png"
+          alt="Student Salary Prediction Tuned"
+          loading="lazy"
+        >
+      </div>
+      <div class="visual-caption">
+        <strong>Salary Prediction — performa model Regression</strong>
+        <p>Evaluasi hasil prediksi model regression.</p>
+      </div>
+    </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- KEY FINDINGS -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>07 / KEY FINDINGS</p>
+        <h2>Key Findings</h2>
+      </div>
+
+      <div class="findings-list">
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            01
+          </div>
+
+          <p>
+            Academic performance dan pengalaman praktis
+            berhubungan dengan career outcomes mahasiswa.
+          </p>
+
+        </div>
+
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            02
+          </div>
+
+          <p>
+            Logistic Regression menjadi model terbaik
+            untuk placement prediction dengan
+            F1-Score sebesar <strong>0.9405</strong>.
+          </p>
+
+        </div>
+
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            03
+          </div>
+
+          <p>
+            ElasticNet menjadi model terbaik untuk
+            salary prediction dengan nilai
+            <strong>R² sebesar 0.598</strong>.
+          </p>
+
+        </div>
+
+
+        <div class="finding-item">
+
+          <div class="finding-number">
+            04
+          </div>
+
+          <p>
+            Hyperparameter tuning dilakukan menggunakan
+            <strong>Optuna</strong> untuk membantu mendapatkan
+            konfigurasi model yang lebih optimal.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- STREAMLIT -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>08 / DEPLOYMENT</p>
+        <h2>Streamlit Application</h2>
+      </div>
+
+      <div class="visual-grid">
+
+        
+<div class="visual-card visual-card-wide">
+
+  <div class="visual-image">
+    <img
+      src="../project-assets/Student Placement and Salary Prediction/streamlit.png"
+      alt="Student Placement and Salary Prediction Streamlit App"
+      loading="lazy"
+    >
+  </div>
+
+  <div class="visual-caption">
+    <strong>Interactive Machine Learning Application</strong>
+
+    <p>
+      Model terbaik diintegrasikan ke aplikasi Streamlit
+      sehingga pengguna dapat memasukkan karakteristik
+      mahasiswa dan mendapatkan hasil prediction.
+    </p>
+  </div>
+
+</div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- LIVE DEMO -->
+    <section class="detail-section">
+
+      <div class="github-panel">
+
+        <p class="project-label">
+          LIVE DEMO
+        </p>
+
+        <h3>
+          Coba Student Placement &amp; Salary Prediction
+        </h3>
+
+        <p>
+          Aplikasi Streamlit menyediakan interface untuk melakukan
+          placement prediction dan salary prediction berdasarkan
+          input pengguna.
+        </p>
+
+        <a
+          href="https://nau-uj.streamlit.app/"
+          class="github-button"
+        >
+          Open Streamlit App
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- TOOLS -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>09 / TOOLS &amp; SKILLS</p>
+        <h2>Tools &amp; Technologies</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <h3>
+            Programming &amp; Data
+          </h3>
+
+          <p>
+            Python · Pandas
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>
+            Machine Learning
+          </h3>
+
+          <p>
+            Scikit-learn · Optuna
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>
+            Deployment &amp; API
+          </h3>
+
+          <p>
+            FastAPI · Streamlit
+          </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+          <h3>
+            Visualization
+          </h3>
+
+          <p>
+            Matplotlib · Seaborn
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- GITHUB -->
+    <section class="detail-section">
+
+      <div class="github-panel">
+
+        <p class="project-label">
+          EXPLORE THE PROJECT
+        </p>
+
+        <h3>
+          Lihat detail pengerjaan di GitHub
+        </h3>
+
+        <p>
+          Source code, preprocessing, model training,
+          hyperparameter tuning, evaluation, dan deployment
+          tersedia di repository GitHub.
+        </p>
+
+        <a
+          href="https://github.com/naufalakhira14-gif/UJ"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="github-button"
+        >
+          View Repository
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- BOTTOM BACK -->
+    <div class="bottom-back">
+
+      <a href="../index.html#projects" class="back-link">
+        ← Back to Projects
+      </a>
+
+    </div>
+
+  </main>
+
+
+  <!-- IMAGE LIGHTBOX -->
+
+  <div id="imageLightbox" class="image-lightbox">
+
+    <button
+      class="lightbox-close"
+      id="closeLightbox"
+      aria-label="Close image"
+    >
+      ×
+    </button>
+
+    <img
+      id="lightboxImage"
+      src=""
+      alt="Full size visualization"
+    >
+
+    <p id="lightboxCaption"></p>
+
+  </div>
+
+
+  <script>
+
+    const lightbox =
+      document.getElementById("imageLightbox");
+
+    const lightboxImage =
+      document.getElementById("lightboxImage");
+
+    const lightboxCaption =
+      document.getElementById("lightboxCaption");
+
+
+    document
+      .querySelectorAll(".visual-card .visual-image img")
+      .forEach((img) => {
+
+        img.addEventListener("click", () => {
+
+          lightboxImage.src = img.src;
+          lightboxImage.alt = img.alt;
+
+          const caption =
+            img
+              .closest(".visual-card")
+              .querySelector(".visual-caption strong");
+
+          lightboxCaption.textContent =
+            caption
+              ? caption.textContent
+              : img.alt;
+
+          lightbox.classList.add("active");
+
+          document.body.style.overflow = "hidden";
+
+        });
+
+      });
+
+
+    function closeImageLightbox() {
+
+      lightbox.classList.remove("active");
+
+      document.body.style.overflow = "";
+
+    }
+
+
+    document
+      .getElementById("closeLightbox")
+      .addEventListener(
+        "click",
+        closeImageLightbox
+      );
+
+
+    lightbox.addEventListener("click", (event) => {
+
+      if (
+        event.target === lightbox ||
+        event.target === lightboxImage
+      ) {
+
+        closeImageLightbox();
+
+      }
+
+    });
+
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.key === "Escape") {
+
+        closeImageLightbox();
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>

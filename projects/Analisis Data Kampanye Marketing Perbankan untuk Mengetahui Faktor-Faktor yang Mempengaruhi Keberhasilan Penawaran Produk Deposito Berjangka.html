@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Marketing Campaign Analysis | Naufal Portfolio</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    :root {
+      --detail-bg: #07050f;
+      --detail-card: #0d0a18;
+      --detail-border: rgba(139, 92, 246, 0.30);
+      --detail-purple: #8b5cf6;
+      --detail-purple-light: #a78bfa;
+      --detail-text: #cfc7df;
+    }
+
+    body {
+      background: var(--detail-bg);
+      color: #fff;
+    }
+
+    .project-detail {
+      width: 100%;
+      padding: 45px 48px 90px;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--detail-purple-light);
+      text-decoration: none;
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      color: #fff;
+    }
+
+    .project-hero {
+      padding: 42px;
+      margin-bottom: 65px;
+      border: 1px solid var(--detail-border);
+      border-radius: 20px;
+      background:
+        radial-gradient(ellipse at top right, rgba(139,92,246,.13), transparent 60%),
+        var(--detail-card);
+    }
+
+    .project-label {
+      color: var(--detail-purple-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .project-hero h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      margin: 14px 0;
+    }
+
+    .project-hero h1 span {
+      color: var(--detail-purple-light);
+    }
+
+    .project-intro {
+      max-width: 850px;
+      color: var(--detail-text);
+      line-height: 1.9;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .project-tags span {
+      padding: 8px 13px;
+      border: 1px solid var(--detail-border);
+      border-radius: 20px;
+      color: var(--detail-purple-light);
+      font-size: 12px;
+    }
+
+    .detail-section {
+      margin-bottom: 62px;
+    }
+
+    .detail-heading {
+      margin-bottom: 24px;
+    }
+
+    .detail-heading p {
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .detail-heading h2 {
+      font-size: 30px;
+      margin-top: 10px;
+    }
+
+    .detail-text {
+      max-width: 1050px;
+      color: var(--detail-text);
+      line-height: 1.9;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .detail-card {
+      padding: 24px;
+      background: var(--detail-card);
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+    }
+
+    .detail-card h3 {
+      margin-top: 0;
+    }
+
+    .detail-card p,
+    .detail-card li {
+      color: var(--detail-text);
+      line-height: 1.8;
+    }
+
+    .dataset-number {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .dataset-label {
+      font-weight: 600;
+    }
+
+    .dataset-note {
+      color: var(--detail-text);
+      line-height: 1.7;
+    }
+
+    .dataset-source {
+      width: 100%;
+      max-width: 950px;
+      box-sizing: border-box;
+      margin-top: 28px;
+      padding: 22px 24px;
+      border: 1px solid var(--detail-border);
+      border-radius: 14px;
+      background: var(--detail-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .dataset-source span {
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    .dataset-source h3 {
+      margin: 12px 0;
+    }
+
+    .dataset-source p {
+      color: var(--detail-text);
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    .dataset-button,
+    .github-button {
+  display: inline-block;
+  padding: 15px 23px;
+  border: none;
+  border-radius: 12px;
+  background: var(--detail-purple);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.github-button:hover {
+  background: var(--detail-purple-light);
+  color: white;
+}
+
+    .pipeline {
+      display: flex;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pipeline-step {
+      flex: 1 1 150px;
+      padding: 18px;
+      border: 1px solid var(--detail-border);
+      border-radius: 12px;
+      background: var(--detail-card);
+      text-align: center;
+    }
+
+    .pipeline-step strong {
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .visual-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .visual-image {
+      width: 100%;
+      height: 280px;
+      padding: 12px;
+      box-sizing: border-box;
+      background: #0b0815;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .visual-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      cursor: zoom-in;
+      transition: transform .25s ease;
+    }
+
+    .visual-image img:hover {
+      transform: scale(1.04);
+    }
+
+    .visual-caption {
+      padding: 18px;
+    }
+
+    .visual-caption strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .visual-caption p {
+      color: var(--detail-text);
+      line-height: 1.7;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .findings-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .finding-item {
+      display: flex;
+      gap: 18px;
+      padding: 20px;
+      background: var(--detail-card);
+      border: 1px solid var(--detail-border);
+      border-radius: 12px;
+    }
+
+    .finding-number {
+      color: var(--detail-purple-light);
+      font-weight: 700;
+    }
+
+    .finding-item p {
+      color: var(--detail-text);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .github-panel {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 40px;
+  border: 1px solid var(--detail-border);
+  border-radius: 20px;
+  background:
+    radial-gradient(
+      ellipse at top right,
+      rgba(139, 92, 246, 0.10),
+      transparent 60%
+    ),
+    var(--detail-card);
+}
+
+.github-label {
+  color: var(--detail-purple-light);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 22px;
+}
+
+.github-panel h3 {
+  font-size: 28px;
+  margin: 0 0 16px;
+}
+
+.github-panel p:not(.github-label) {
+  color: var(--detail-text);
+  line-height: 1.8;
+  margin: 0 0 24px;
+}
+
+    .bottom-back {
+      display: inline-block;
+      margin-top: 28px;
+      color: var(--detail-purple-light);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 800px) {
+      .project-detail {
+        padding: 28px 20px 60px;
+      }
+
+      .project-hero {
+        padding: 26px;
+        margin-bottom: 45px;
+      }
+
+      .detail-grid,
+      .visual-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dataset-source {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .dataset-button {
+        white-space: normal;
+      }
+
+      .visual-image {
+        height: 240px;
+      }
+    }
+    
+/* Posisikan kartu visual terakhir di tengah jika jumlahnya ganjil */
+.visual-grid > .visual-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+}
+
+  </style>
+</head>
+
+<body>
+  <main class="project-detail">
+
+    <a href="../index.html#projects" class="back-link">
+      ← Back to Projects
+    </a>
+
+    <!-- HERO -->
+    <header class="project-hero">
+      <p class="project-label">Statistical Analysis · Banking</p>
+
+      <h1>Bank Marketing <span>Campaign Analysis</span></h1>
+
+      <p class="project-intro">
+        Proyek ini menganalisis data kampanye pemasaran perbankan
+        untuk memahami karakteristik nasabah dan faktor-faktor yang
+        berkaitan dengan keberhasilan penawaran produk deposito
+        berjangka. Analisis dilakukan menggunakan R, mulai dari
+        data quality assessment dan data cleaning hingga exploratory
+        data analysis, pengujian statistik, visualisasi, dan
+        penyusunan rekomendasi bisnis.
+      </p>
+
+      <div class="project-tags">
+        <span>R</span>
+        <span>R Markdown</span>
+        <span>EDA</span>
+        <span>Statistical Analysis</span>
+        <span>Plotly</span>
+      </div>
+    </header>
+
+    <!-- 01 OVERVIEW -->
+    <section class="detail-section">
+      <div class="detail-heading">
+        <p>01 / PROJECT OVERVIEW</p>
+        <h2>Project Overview</h2>
+      </div>
+
+      <div class="detail-text">
+        Proyek ini mengeksplorasi karakteristik nasabah, aktivitas
+        kampanye pemasaran, dan hasil penawaran deposito berjangka.
+        Hasil analisis digunakan untuk memahami pola respons nasabah
+        dan merumuskan rekomendasi pemasaran berbasis data.
+      </div>
+    </section>
+
+    <!-- 02 OBJECTIVE -->
+    <section class="detail-section">
+      <div class="detail-heading">
+        <p>02 / OBJECTIVE</p>
+        <h2>Project Objective</h2>
+      </div>
+
+      <div class="detail-grid">
+        <div class="detail-card">
+          <h3>Data Quality</h3>
+          <p>
+            Mengidentifikasi dan menangani masalah kualitas data
+            sebelum proses analisis dilakukan.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Campaign Analysis</h3>
+          <p>
+            Mengeksplorasi karakteristik nasabah serta hubungan
+            variabel kampanye dengan respons nasabah.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Business Insights</h3>
+          <p>
+            Menerjemahkan temuan statistik menjadi rekomendasi
+            untuk mendukung strategi pemasaran yang lebih terarah.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 DATASET -->
+    <section class="detail-section">
+      <div class="detail-heading">
+        <p>03 / DATASET</p>
+        <h2>Dataset Overview</h2>
+      </div>
+
+      <div class="detail-grid">
+        <div class="detail-card">
+          <span class="dataset-number">8,237</span>
+          <span class="dataset-label">Records Before Cleaning</span>
+          <p class="dataset-note">
+            Jumlah observasi sebelum proses data cleaning.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <span class="dataset-number">17</span>
+          <span class="dataset-label">Variables</span>
+          <p class="dataset-note">
+            Variabel demografi nasabah, kontak, dan aktivitas kampanye.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <span class="dataset-number">Yes / No</span>
+          <span class="dataset-label">Target Variable: y</span>
+          <p class="dataset-note">
+            Hasil penawaran produk deposito berjangka.
+          </p>
+        </div>
+      </div>
+
+      <div class="detail-text" style="margin-top: 24px;">
+        Dataset mencakup informasi demografi nasabah, karakteristik
+        kontak, aktivitas kampanye, riwayat kampanye sebelumnya,
+        dan hasil penawaran produk deposito berjangka.
+      </div>
+
+      <!-- Tambahkan kartu dataset di sini jika memiliki URL sumber asli -->
+    </section>
+
+    <!-- 04 DATA PROCESSING -->
+    <section class="detail-section">
+      <div class="detail-heading">
+        <p>04 / DATA PROCESSING</p>
+        <h2>Data Processing Workflow</h2>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipeline-step"><strong>Data Understanding</strong></div>
+        <div class="pipeline-step"><strong>Data Quality Assessment</strong></div>
+        <div class="pipeline-step"><strong>Data Cleaning &amp; Transformation</strong></div>
+        <div class="pipeline-step"><strong>Exploratory Data Analysis</strong></div>
+        <div class="pipeline-step"><strong>Statistical Analysis</strong></div>
+        <div class="pipeline-step"><strong>Feature Engineering</strong></div>
+        <div class="pipeline-step"><strong>Visualization &amp; Business Insights</strong></div>
+      </div>
+    </section>
+
+    <!-- 05 VISUALIZATION -->
+    <section class="detail-section">
+      <div class="detail-heading">
+        <p>05 / VISUALIZATION &amp; ANALYSIS</p>
+        <h2>Campaign Analysis</h2>
+      </div>
+
+      <div class="visual-grid">
+
+        <div class="visual-card">
+          <div class="visual-image">
+            <img
+              src="../project-assets/Analisis Data Kampanye Marketing Perbankan untuk Mengetahui Faktor-Faktor yang Mempengaruhi Keberhasilan Penawaran Produk Deposito Berjangka/outcome.png"
+              alt="Call Duration vs Campaign Outcome"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="visual-caption">
+            <strong>Call Duration vs Campaign Outcome</strong>
+            <p>
+              Analisis hubungan durasi panggilan dengan hasil
+              kampanye pemasaran.
+            </p>
+          </div>
+        </div>
+
+        <div class="visual-card">
+          <div class="visual-image">
+            <img
+              src="../project-assets/Analisis Data Kampanye Marketing Perbankan untuk Mengetahui Faktor-Faktor yang Mempengaruhi Keberhasilan Penawaran Produk Deposito Berjangka/kampanya.png"
+              alt="Previous Campaign Outcome Analysis"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="visual-caption">
+            <strong>Previous Campaign Outcome</strong>
+            <p>
+              Perbandingan tingkat respons berdasarkan hasil
+              kampanye sebelumnya.
+            </p>
+          </div>
+        </div>
+
+        <div class="visual-card">
+          <div class="visual-image">
+            <img
+              src="../project-assets/Analisis Data Kampanye Marketing Perbankan untuk Mengetahui Faktor-Faktor yang Mempengaruhi Keberhasilan Penawaran Produk Deposito Berjangka/edu.png"
+              alt="Education vs Campaign Outcome"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="visual-caption">
+            <strong>Education vs Campaign Outcome</strong>
+            <p>
+              Analisis tingkat respons nasabah berdasarkan
+              tingkat pendidikan.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 06 KEY FINDINGS -->
+    <section class="detail-section">
+      <div class="detail-heading">
+        <p>06 / KEY FINDINGS</p>
+        <h2>Key Findings</h2>
+      </div>
+
+      <div class="findings-list">
+        <div class="finding-item">
+          <span class="finding-number">01</span>
+          <p>
+            <strong>Call Duration:</strong> Kendall's Tau menunjukkan
+            korelasi positif sebesar 0.287 antara durasi panggilan dan
+            hasil kampanye yang dikodekan secara numerik, dengan
+            p-value &lt; 0.001.
+          </p>
+        </div>
+
+        <div class="finding-item">
+          <span class="finding-number">02</span>
+          <p>
+            <strong>Previous Campaign Outcome:</strong> Nasabah dengan
+            hasil kampanye sebelumnya <code>success</code> memiliki
+            tingkat respons positif sekitar 69.76%, dibandingkan
+            <code>failure</code> (14.16%) dan <code>nonexistent</code>
+            (9.24%).
+          </p>
+        </div>
+
+        <div class="finding-item">
+          <span class="finding-number">03</span>
+          <p>
+            <strong>Education Level:</strong> Kelompok
+            <code>university.degree</code> memiliki tingkat respons
+            positif sekitar 15.05%, sedangkan kelompok
+            <code>professional.course</code> sekitar 11.31%.
+          </p>
+        </div>
+
+        <div class="finding-item">
+          <span class="finding-number">04</span>
+          <p>
+            <strong>Business Implication:</strong> Riwayat kampanye
+            dan karakteristik nasabah dapat menjadi pertimbangan
+            dalam menyusun strategi pemasaran yang lebih terarah.
+          </p>
+        </div>
+      </div>
+
+      <p class="detail-text" style="margin-top: 20px;">
+        Catatan: Temuan ini menggambarkan hubungan dalam data dan
+        tidak membuktikan hubungan sebab-akibat.
+      </p>
+    </section>
+
+    <!-- 07 BUSINESS RECOMMENDATIONS -->
+    <section class="detail-section">
+      <div class="detail-heading">
+        <p>07 / BUSINESS RECOMMENDATIONS</p>
+        <h2>Recommendations</h2>
+      </div>
+
+      <div class="detail-grid">
+        <div class="detail-card">
+          <h3>Customer Targeting</h3>
+          <p>
+            Evaluasi strategi penargetan berdasarkan hasil kampanye
+            sebelumnya dan tingkat respons kelompok nasabah.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Campaign Evaluation</h3>
+          <p>
+            Tinjau pola durasi panggilan dan respons positif untuk
+            mengevaluasi pendekatan komunikasi pemasaran.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Data-Driven Decisions</h3>
+          <p>
+            Gunakan hasil analisis sebagai bahan pertimbangan,
+            tanpa menganggap hubungan statistik sebagai bukti kausal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 TOOLS -->
+    <section class="detail-section">
+      <div class="detail-heading">
+        <p>08 / TOOLS &amp; METHODS</p>
+        <h2>Tools &amp; Techniques</h2>
+      </div>
+
+      <div class="project-tags">
+        <span>R</span>
+        <span>R Markdown</span>
+        <span>Plotly</span>
+        <span>Data Cleaning</span>
+        <span>EDA</span>
+        <span>Hypothesis Testing</span>
+        <span>Kendall's Tau</span>
+        <span>Feature Engineering</span>
+      </div>
+    </section>
+
+    <!-- 09 GITHUB -->
+    
+<!-- 09 GITHUB -->
+<section class="detail-section">
+  <div class="github-panel">
+    <p class="github-label">EXPLORE THE PROJECT</p>
+
+    <h3>Explore the Statistical Analysis</h3>
+
+    <p>
+      View the research workflow, data preprocessing, statistical
+      tests, and regression analysis in the project repository.
+    </p>
+
+    <a
+      href="https://github.com/naufalakhira14-gif/Analisis-Keberhasilan-Kampanye-Marketing-Bank"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-button"
+    >
+      View Repository
+    </a>
+  </div>
+</section>
+
+
+    <a href="../index.html#projects" class="bottom-back">
+      ← Back to Projects
+    </a>
+
+  </main>
+</body>
+</html>

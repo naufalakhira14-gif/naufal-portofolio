@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Stock Price Prediction | Naufal Portfolio</title>
+
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    :root {
+      --detail-bg: #07050f;
+      --detail-card: #0d0a18;
+      --detail-border: rgba(139, 92, 246, 0.30);
+      --detail-purple: #8b5cf6;
+      --detail-purple-light: #a78bfa;
+      --detail-text: #cfc7df;
+    }
+
+    body {
+      background: var(--detail-bg);
+    }
+
+    .project-detail {
+      width: 100%;
+      padding: 45px 48px 90px;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--detail-text);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 30px;
+      transition: 0.3s ease;
+    }
+
+    .back-link:hover {
+      color: var(--detail-purple-light);
+    }
+
+    .project-hero {
+      padding: 42px;
+      margin-bottom: 65px;
+      border: 1px solid var(--detail-border);
+      border-radius: 20px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(139, 92, 246, 0.14),
+          transparent 40%
+        ),
+        var(--detail-card);
+    }
+
+    .project-label {
+      color: var(--detail-purple-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .project-hero h1 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.05;
+      color: #fff;
+    }
+
+    .project-hero h1 span {
+      color: var(--detail-purple-light);
+    }
+
+    .project-intro {
+      max-width: 850px;
+      margin: 22px 0 25px;
+      color: var(--detail-text);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .project-tags span {
+      padding: 8px 13px;
+      border: 1px solid var(--detail-border);
+      border-radius: 999px;
+      color: var(--detail-text);
+      font-size: 12px;
+      background: rgba(139, 92, 246, 0.05);
+    }
+
+    .detail-section {
+      margin-bottom: 70px;
+    }
+
+    .detail-heading {
+      margin-bottom: 24px;
+    }
+
+    .detail-heading p {
+      margin: 0 0 8px;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .detail-heading h2 {
+      margin: 0;
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .detail-text {
+      max-width: 900px;
+      color: var(--detail-text);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .detail-card {
+      padding: 25px;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .detail-card h3 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .detail-card p,
+    .detail-card li {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .detail-card ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .dataset-number {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .dataset-label {
+      display: block;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dataset-note {
+      margin-top: 8px;
+      color: var(--detail-text);
+      font-size: 12px;
+    }
+
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pipeline-step {
+      padding: 13px 16px;
+      border: 1px solid var(--detail-border);
+      border-radius: 10px;
+      background: var(--detail-card);
+      color: var(--detail-text);
+      font-size: 13px;
+    }
+
+    .pipeline-step span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+
+    .pipeline-step strong {
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .visual-card {
+      overflow: hidden;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .visual-placeholder {
+      min-height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      box-sizing: border-box;
+      background:
+        radial-gradient(
+          circle,
+          rgba(139, 92, 246, 0.10),
+          transparent 65%
+        );
+    }
+
+    .visual-placeholder span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .visual-placeholder strong {
+      display: block;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .visual-placeholder p {
+      margin: 8px 0 0;
+      color: var(--detail-text);
+      font-size: 13px;
+    }
+
+    .visual-card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .visual-caption {
+      padding: 16px 18px 19px;
+    }
+
+    .visual-caption strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .visual-caption p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .findings-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .finding-item {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 15px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--detail-border);
+      border-radius: 12px;
+      background: var(--detail-card);
+    }
+
+    .finding-number {
+      color: var(--detail-purple-light);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .finding-item p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .github-panel {
+      padding: 30px;
+      border: 1px solid var(--detail-border);
+      border-radius: 16px;
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(139, 92, 246, 0.12),
+          transparent 45%
+        ),
+        var(--detail-card);
+    }
+
+    .github-panel h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .github-panel p {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 11px 18px;
+      border-radius: 9px;
+      background: var(--detail-purple);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .github-button:hover {
+      background: var(--detail-purple-light);
+      color: #08050f;
+    }
+
+    .bottom-back {
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .project-detail {
+        padding: 35px 25px 70px;
+      }
+
+      .detail-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .project-detail {
+        padding: 25px 18px 60px;
+      }
+
+      .project-hero {
+        padding: 28px 22px;
+      }
+
+      .project-hero h1 {
+        font-size: 36px;
+      }
+
+      .detail-grid,
+      .visual-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .pipeline-step {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+    
+    /* Preview gambar visualisasi */
+    .visual-card .visual-image {
+    height: 260px;
+    overflow: hidden;
+    background: #0b0815;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .visual-card .visual-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    cursor: zoom-in;
+    transition: filter 0.3s ease;
+    }
+
+    .visual-card .visual-image img:hover {
+    filter: brightness(1.1);
+    }
+
+    /* Tampilan gambar ukuran penuh */
+    .image-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+    background: rgba(4, 2, 10, 0.96);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: 0.25s ease;
+    }
+
+    .image-lightbox.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    }
+
+    .image-lightbox img {
+    max-width: 92vw;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    cursor: zoom-out;
+    }
+
+    .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    border: 1px solid var(--detail-border);
+    border-radius: 50%;
+    background: var(--detail-card);
+    color: white;
+    font-size: 28px;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    }
+
+    .image-lightbox p {
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+    }
+
+  </style>
+</head>
+
+
+<!-- IMAGE LIGHTBOX -->
+<div id="imageLightbox" class="image-lightbox">
+  <button
+    class="lightbox-close"
+    id="closeLightbox"
+    aria-label="Close image"
+  >×</button>
+
+  <img id="lightboxImage" src="" alt="Full size visualization">
+  <p id="lightboxCaption"></p>
+</div>
+
+<script>
+  const lightbox = document.getElementById("imageLightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxCaption = document.getElementById("lightboxCaption");
+
+  document.querySelectorAll(".visual-card .visual-image img")
+    .forEach((img) => {
+      img.addEventListener("click", () => {
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt;
+
+        const caption = img.closest(".visual-card")
+          .querySelector(".visual-caption strong");
+
+        lightboxCaption.textContent = caption
+          ? caption.textContent
+          : img.alt;
+
+        lightbox.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+  function closeImageLightbox() {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  document.getElementById("closeLightbox")
+    .addEventListener("click", closeImageLightbox);
+
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox || event.target === lightboxImage) {
+      closeImageLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeImageLightbox();
+    }
+  });
+</script>
+</body>
+</html>
+
+
+<body>
+
+  <main class="project-detail">
+
+    <a href="../index.html#projects" class="back-link">
+      ← Back to Projects
+    </a>
+
+    <!-- HERO -->
+    <header class="project-hero">
+
+      <p class="project-label">MACHINE LEARNING · TIME SERIES</p>
+
+      <h1>
+        Stock Price <span>Prediction</span>
+      </h1>
+
+      <p class="project-intro">
+        Project ini membangun model Long Short-Term Memory (LSTM)
+        untuk memprediksi harga penutupan saham berdasarkan data historis.
+        Dua dataset saham, GOOGL dan INTC, digunakan untuk membangun
+        Baseline LSTM dan Improved LSTM serta membandingkan performanya.
+      </p>
+
+      <div class="project-tags">
+        <span>Python</span>
+        <span>TensorFlow</span>
+        <span>Keras</span>
+        <span>LSTM</span>
+        <span>Time Series</span>
+      </div>
+
+    </header>
+
+
+    <!-- OVERVIEW -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>01 / PROJECT OVERVIEW</p>
+        <h2>Project Overview</h2>
+      </div>
+
+      <p class="detail-text">
+        Project ini berfokus pada penerapan Long Short-Term Memory (LSTM)
+        untuk melakukan time series forecasting pada harga saham.
+        Data historis GOOGL dan INTC digunakan untuk memprediksi
+        Closing Price pada hari perdagangan berikutnya berdasarkan
+        lima hari perdagangan sebelumnya.
+      </p>
+
+      
+        <!-- DATASET SOURCE -->
+        <div class="dataset-source">
+        <div>
+            <span>DATASET SOURCE</span>
+            <h3>GOOGL &amp; INTC Stock Historical Data</h3>
+            <p>
+            Dataset historis harga saham Alphabet Inc. (GOOGL) dan
+            Intel Corporation (INTC) yang digunakan untuk membangun
+            dan mengevaluasi model LSTM time series forecasting.
+            </p>
+        </div>
+
+        <a
+            href="../project-assets/Prediksi Harga Saham Menggunakan Long Short-Term Memory (LSTM)/dataset.zip"
+            download
+            class="dataset-button"
+        >
+            View Dataset
+        </a>
+        </div>
+
+    </section>
+
+
+    <!-- OBJECTIVE -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>02 / OBJECTIVE</p>
+        <h2>Project Objective</h2>
+      </div>
+
+      <p class="detail-text">
+        Memprediksi harga Closing Price pada hari berikutnya berdasarkan
+        lima hari perdagangan sebelumnya serta membandingkan performa
+        Baseline LSTM dan Improved LSTM pada dua dataset saham yang berbeda.
+      </p>
+
+    </section>
+
+
+    <!-- DATASET -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>03 / DATASET</p>
+        <h2>Dataset</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+          <span class="dataset-number">3,932</span>
+          <span class="dataset-label">GOOGL Trading Records</span>
+          <p class="dataset-note">
+            Data historis saham Alphabet Inc.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <span class="dataset-number">10,098</span>
+          <span class="dataset-label">INTC Trading Records</span>
+          <p class="dataset-note">
+            Data historis saham Intel Corporation.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <span class="dataset-number">5</span>
+          <span class="dataset-label">Window Size</span>
+          <p class="dataset-note">
+            Menggunakan lima hari perdagangan sebelumnya.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <span class="dataset-number">1</span>
+          <span class="dataset-label">Forecast Horizon</span>
+          <p class="dataset-note">
+            Memprediksi satu hari perdagangan berikutnya.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <span class="dataset-number">1</span>
+          <span class="dataset-label">Prediction Target</span>
+          <p class="dataset-note">
+            Closing Price.
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <span class="dataset-number">2</span>
+          <span class="dataset-label">Stock Datasets</span>
+          <p class="dataset-note">
+            GOOGL dan INTC.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DATA PROCESSING -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>04 / DATA PROCESSING</p>
+        <h2>Data Processing Pipeline</h2>
+      </div>
+
+      <div class="pipeline">
+
+        <div class="pipeline-step">
+          <span>STEP 01</span>
+          <strong>Data Understanding</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 02</span>
+          <strong>EDA</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 03</span>
+          <strong>Train-Test Split</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 04</span>
+          <strong>MinMax Normalization</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 05</span>
+          <strong>Sliding Window</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 06</span>
+          <strong>Train-Validation Split</strong>
+        </div>
+
+        <div class="pipeline-step">
+          <span>STEP 07</span>
+          <strong>LSTM Modeling</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MODEL DEVELOPMENT -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>05 / MODEL DEVELOPMENT</p>
+        <h2>LSTM Architecture</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <h3>Baseline LSTM</h3>
+
+          <ul>
+            <li>LSTM Layer — 50 Units</li>
+            <li>Dense Output Layer</li>
+            <li>Single LSTM architecture</li>
+          </ul>
+
+        </div>
+
+        <div class="detail-card">
+
+          <h3>Improved LSTM</h3>
+
+          <ul>
+            <li>Multiple LSTM Layers</li>
+            <li>Dropout</li>
+            <li>Dense Layer</li>
+            <li>Dense Output</li>
+          </ul>
+
+        </div>
+
+        <div class="detail-card">
+
+          <h3>Training Configuration</h3>
+
+          <ul>
+            <li>Optimizer: Adam</li>
+            <li>Loss: MSE</li>
+            <li>Epochs: 50</li>
+            <li>Batch Size: 32</li>
+            <li>Validation: 90% / 10%</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RESULTS -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>06 / MODEL RESULTS</p>
+        <h2>Model Performance</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+
+          <h3>GOOGL — Baseline LSTM</h3>
+
+          <p>
+            RMSE: <strong>63.69</strong><br>
+            MAE: <strong>50.93</strong><br>
+            MAPE: <strong>3.98%</strong>
+          </p>
+
+        </div>
+
+        <div class="detail-card">
+
+          <h3>GOOGL — Improved LSTM</h3>
+
+          <p>
+            RMSE: <strong>30.29</strong><br>
+            MAE: <strong>21.17</strong><br>
+            MAPE: <strong>1.72%</strong>
+          </p>
+
+        </div>
+
+        <div class="detail-card">
+
+          <h3>INTC — Baseline LSTM</h3>
+
+          <p>
+            RMSE: <strong>1.57</strong><br>
+            MAE: <strong>0.99</strong><br>
+            MAPE: <strong>1.88%</strong>
+          </p>
+
+        </div>
+
+        <div class="detail-card">
+
+          <h3>INTC — Improved LSTM</h3>
+
+          <p>
+            RMSE: <strong>1.73</strong><br>
+            MAE: <strong>1.19</strong><br>
+            MAPE: <strong>2.27%</strong>
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- VISUALIZATION -->
+    <section class="detail-section">
+
+    <div class="detail-heading">
+        <p>07 / VISUALIZATION</p>
+        <h2>Model Visualization</h2>
+    </div>
+
+    <div class="visual-grid">
+
+        <!-- 1. BASELINE ACTUAL VS PREDICTED -->
+        <div class="visual-card">
+
+        <div class="visual-image">
+            <img
+            src="../project-assets/Prediksi Harga Saham Menggunakan Long Short-Term Memory (LSTM)/ac vs pre base.png"
+            alt="Baseline LSTM Actual vs Predicted"
+            >
+        </div>
+
+        <div class="visual-caption">
+            <strong>Baseline LSTM — Actual vs Predicted</strong>
+            <p>
+            Perbandingan harga aktual dan harga prediksi GOOGL dan INTC
+            menggunakan Baseline LSTM.
+            </p>
+        </div>
+
+        </div>
+
+
+        <!-- 2. BASELINE TRAINING HISTORY -->
+        <div class="visual-card">
+
+        <div class="visual-image">
+            <img
+            src="../project-assets/Prediksi Harga Saham Menggunakan Long Short-Term Memory (LSTM)/training.png"
+            alt="Baseline LSTM Training History"
+            >
+        </div>
+
+        <div class="visual-caption">
+            <strong>Baseline LSTM — Training History</strong>
+            <p>
+            Perkembangan training loss dan validation loss selama proses
+            training Baseline LSTM pada GOOGL dan INTC.
+            </p>
+        </div>
+
+        </div>
+
+
+        <!-- 3. HISTORICAL STOCK PRICE -->
+        <div class="visual-card">
+
+        <div class="visual-image">
+            <img
+            src="../project-assets/Prediksi Harga Saham Menggunakan Long Short-Term Memory (LSTM)/history.png"
+            alt="Historical Closing Price GOOGL and INTC"
+            >
+        </div>
+
+        <div class="visual-caption">
+            <strong>Historical Closing Price</strong>
+            <p>
+            Pergerakan historis harga penutupan saham GOOGL dan INTC
+            yang digunakan sebagai dasar time series forecasting.
+            </p>
+        </div>
+
+        </div>
+
+
+        <!-- 4. IMPROVED ACTUAL VS PREDICTED -->
+        <div class="visual-card">
+
+        <div class="visual-image">
+            <img
+            src="../project-assets/Prediksi Harga Saham Menggunakan Long Short-Term Memory (LSTM)/ac vs pre improved.png"
+            alt="Improved LSTM Actual vs Predicted"
+            >
+        </div>
+
+        <div class="visual-caption">
+            <strong>Improved LSTM — Actual vs Predicted</strong>
+            <p>
+            Perbandingan harga aktual dan harga prediksi GOOGL dan INTC
+            menggunakan Improved LSTM.
+            </p>
+        </div>
+
+        </div>
+
+
+        <!-- 5. IMPROVED TRAINING HISTORY -->
+        <div class="visual-card visual-card-wide">
+
+        <div class="visual-image">
+            <img
+            src="../project-assets/Prediksi Harga Saham Menggunakan Long Short-Term Memory (LSTM)/training improved.png"
+            alt="Improved LSTM Training History"
+            >
+        </div>
+
+        <div class="visual-caption">
+            <strong>Improved LSTM — Training History</strong>
+            <p>
+            Perkembangan training loss dan validation loss selama proses
+            training Improved LSTM pada GOOGL dan INTC.
+            </p>
+        </div>
+
+        </div>
+
+    </div>
+
+    </section>
+
+
+    <!-- KEY FINDINGS -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>08 / KEY FINDINGS</p>
+        <h2>Key Findings</h2>
+      </div>
+
+      <div class="findings-list">
+
+        <div class="finding-item">
+          <div class="finding-number">01</div>
+          <p>
+            Improved LSTM memberikan peningkatan performa yang signifikan
+            pada dataset GOOGL, dengan RMSE turun dari 63.69 menjadi 30.29.
+          </p>
+        </div>
+
+        <div class="finding-item">
+          <div class="finding-number">02</div>
+          <p>
+            Pada dataset INTC, Baseline LSTM justru menghasilkan performa
+            yang lebih baik dibandingkan Improved LSTM.
+          </p>
+        </div>
+
+        <div class="finding-item">
+          <div class="finding-number">03</div>
+          <p>
+            Model dengan arsitektur yang lebih kompleks tidak selalu
+            menghasilkan performa forecasting yang lebih baik.
+          </p>
+        </div>
+
+        <div class="finding-item">
+          <div class="finding-number">04</div>
+          <p>
+            Arsitektur LSTM yang optimal bergantung pada karakteristik
+            dataset dan pola time series yang digunakan.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TOOLS -->
+    <section class="detail-section">
+
+      <div class="detail-heading">
+        <p>09 / TECHNOLOGY STACK</p>
+        <h2>Tools & Technologies</h2>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="detail-card">
+          <h3>Programming</h3>
+          <p>
+            Python · Pandas · NumPy
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Machine Learning</h3>
+          <p>
+            Scikit-learn · TensorFlow · Keras
+          </p>
+        </div>
+
+        <div class="detail-card">
+          <h3>Visualization</h3>
+          <p>
+            Matplotlib
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- GITHUB -->
+    <section class="detail-section">
+
+      <div class="github-panel">
+
+        <p class="project-label">EXPLORE THE PROJECT</p>
+
+        <h3>
+          Lihat detail pengerjaan di GitHub
+        </h3>
+
+        <p>
+          Source code, proses preprocessing, training model,
+          evaluasi, dan eksperimen LSTM tersedia di repository GitHub.
+        </p>
+
+        <a
+          href="https://github.com/naufalakhira14-gif/Prediksi-Harga-Saham-Menggunakan-Long-Short-Term-Memory-LSTM-"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="github-button"
+        >
+          View Repository →
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <div class="bottom-back">
+      <a href="../index.html#projects" class="back-link">
+        ← Back to Projects
+      </a>
+    </div>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,791 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Song Recommendation System | Naufal Portfolio</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    :root {
+      --detail-bg: #07050f;
+      --detail-card: #0d0a18;
+      --detail-border: rgba(139, 92, 246, 0.30);
+      --detail-purple: #8b5cf6;
+      --detail-purple-light: #a78bfa;
+      --detail-text: #cfc7df;
+    }
+
+    body { background: var(--detail-bg); }
+
+    .project-detail {
+      width: 100%;
+      padding: 45px 48px 90px;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--detail-text);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 30px;
+      transition: 0.3s ease;
+    }
+
+    .back-link:hover { color: var(--detail-purple-light); }
+
+    .project-hero {
+      padding: 42px;
+      margin-bottom: 65px;
+      border: 1px solid var(--detail-border);
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at top right, rgba(139,92,246,.14), transparent 40%),
+        var(--detail-card);
+    }
+
+    .project-label {
+      color: var(--detail-purple-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .project-hero h1 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.1;
+      color: #fff;
+    }
+
+    .project-hero h1 span { color: var(--detail-purple-light); }
+
+    .project-intro {
+      max-width: 900px;
+      margin: 22px 0 25px;
+      color: var(--detail-text);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .project-tags span {
+      padding: 8px 13px;
+      border: 1px solid var(--detail-border);
+      border-radius: 999px;
+      color: var(--detail-text);
+      font-size: 12px;
+      background: rgba(139,92,246,.05);
+    }
+
+    .detail-section { margin-bottom: 70px; }
+
+    .detail-heading { margin-bottom: 24px; }
+
+    .detail-heading p {
+      margin: 0 0 8px;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .detail-heading h2 {
+      margin: 0;
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .detail-text {
+      max-width: 950px;
+      color: var(--detail-text);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .detail-card {
+      padding: 25px;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+      min-width: 0;
+    }
+
+    .detail-card h3 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .detail-card p,
+    .detail-card li {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .detail-card ul { padding-left: 18px; margin: 0; }
+
+    .dataset-number {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .dataset-label {
+      display: block;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dataset-note {
+      margin-top: 8px;
+      color: var(--detail-text);
+      font-size: 12px;
+    }
+
+    .dataset-source {
+      width: 100%;
+      max-width: 950px;
+      box-sizing: border-box;
+      margin-top: 28px;
+      padding: 22px 24px;
+      border: 1px solid var(--detail-border);
+      border-radius: 14px;
+      background: var(--detail-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .dataset-source > div { flex: 1; }
+
+    .dataset-source span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    .dataset-source h3 {
+      color: #fff;
+      font-size: 16px;
+      margin: 0 0 10px;
+    }
+
+    .dataset-source p {
+      color: var(--detail-text);
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .dataset-button {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border: 1px solid var(--detail-purple);
+      border-radius: 9px;
+      color: var(--detail-purple-light);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .3s ease;
+    }
+
+    .dataset-button:hover {
+      background: var(--detail-purple);
+      color: #fff;
+    }
+
+    .pipeline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pipeline-step {
+      padding: 13px 16px;
+      border: 1px solid var(--detail-border);
+      border-radius: 10px;
+      background: var(--detail-card);
+      color: var(--detail-text);
+      font-size: 13px;
+    }
+
+    .pipeline-step span {
+      display: block;
+      color: var(--detail-purple-light);
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+
+    .pipeline-step strong { color: #fff; font-size: 13px; }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .visual-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--detail-border);
+      border-radius: 15px;
+      background: var(--detail-card);
+    }
+
+    .visual-card-wide {
+      grid-column: 1 / -1;
+      width: 75%;
+      justify-self: center;
+    }
+
+    .visual-image {
+      width: 100%;
+      height: 280px;
+      padding: 12px;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0b0815;
+    }
+
+    .visual-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      border-radius: 6px;
+      cursor: zoom-in;
+      transition: transform .25s ease;
+    }
+
+    .visual-image img:hover { transform: scale(1.025); }
+
+    .visual-caption { padding: 16px 18px 19px; }
+
+    .visual-caption strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .visual-caption p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .findings-list { display: grid; gap: 14px; }
+
+    .finding-item {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 15px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--detail-border);
+      border-radius: 12px;
+      background: var(--detail-card);
+    }
+
+    .finding-number {
+      color: var(--detail-purple-light);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .finding-item p {
+      margin: 0;
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .github-panel {
+      padding: 30px;
+      border: 1px solid var(--detail-border);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at top right, rgba(139,92,246,.12), transparent 45%),
+        var(--detail-card);
+    }
+
+    .github-panel h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: 22px;
+    }
+
+    .github-panel p {
+      color: var(--detail-text);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 11px 18px;
+      border-radius: 9px;
+      background: var(--detail-purple);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .3s ease;
+    }
+
+    .github-button:hover {
+      background: var(--detail-purple-light);
+      color: #08050f;
+    }
+
+    .bottom-back { margin-top: 40px; }
+
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      box-sizing: border-box;
+      background: rgba(4,2,10,.96);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    .image-lightbox.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .image-lightbox img {
+      max-width: 92vw;
+      max-height: 82vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      cursor: zoom-out;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      border: 1px solid var(--detail-border);
+      border-radius: 50%;
+      background: var(--detail-card);
+      color: white;
+      font-size: 28px;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+    }
+
+    .image-lightbox p {
+      color: white;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 900px) {
+      .project-detail { padding: 35px 25px 70px; }
+      .detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .visual-card-wide { width: 100%; }
+    }
+
+    @media (max-width: 650px) {
+      .project-detail { padding: 25px 18px 60px; }
+      .project-hero { padding: 28px 22px; }
+      .project-hero h1 { font-size: 36px; }
+      .detail-grid, .visual-grid { grid-template-columns: 1fr; }
+      .visual-card-wide { grid-column: auto; }
+      .pipeline { flex-direction: column; align-items: stretch; }
+      .pipeline-step { box-sizing: border-box; }
+      .dataset-source { flex-direction: column; align-items: flex-start; }
+      .visual-image { height: 240px; }
+    }
+    
+/* Rapikan jarak Overview dan Dataset Source */
+.detail-section:has(+ .dataset-source) {
+  margin-bottom: 0;
+}
+
+.dataset-source {
+  margin-top: 18px;
+  margin-bottom: 45px;
+}
+
+  </style>
+</head>
+
+<body>
+<main class="project-detail">
+
+  <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+
+  <!-- HERO -->
+  <header class="project-hero">
+    <p class="project-label">MACHINE LEARNING · MUSIC RECOMMENDATION</p>
+    <h1>Song Recommendation <span>System</span></h1>
+    <p class="project-intro">
+      Proyek ini membangun sistem rekomendasi lagu berbasis Machine Learning
+      yang menyarankan lagu berdasarkan kemiripan karakteristik audio.
+      Fitur seperti Danceability, Energy, Valence, Acousticness, dan Tempo
+      digunakan untuk menemukan lagu dengan karakteristik musikal serupa.
+    </p>
+    <div class="project-tags">
+      <span>Python</span>
+      <span>Pandas</span>
+      <span>NumPy</span>
+      <span>Scikit-learn</span>
+      <span>Cosine Similarity</span>
+    </div>
+  </header>
+
+  <!-- OVERVIEW -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>01 / PROJECT OVERVIEW</p>
+      <h2>Project Overview</h2>
+    </div>
+    <p class="detail-text">
+      Proyek ini mengembangkan sistem rekomendasi lagu menggunakan pendekatan
+      Content-Based Recommendation. Sistem membandingkan karakteristik audio
+      antar lagu untuk memberikan rekomendasi berdasarkan kemiripan fitur,
+      bukan hanya berdasarkan popularitas lagu.
+    </p>
+  </section>
+
+
+<!-- DATASET SOURCE -->
+<div class="dataset-source">
+  <div>
+    <span>DATASET SOURCE</span>
+    <h3>Music Track &amp; Audio Features Dataset</h3>
+    <p>
+      Dataset berisi 5.000 lagu dengan 19 kolom,
+      termasuk karakteristik audio yang digunakan
+      untuk membangun sistem rekomendasi lagu.
+    </p>
+  </div>
+
+  <a
+    href="../project-assets/Song Recomendation/song_recomendation_A.csv"
+    download=""
+    class="dataset-button"
+  >
+    View Dataset
+  </a>
+</div>
+
+
+
+  <!-- OBJECTIVE -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>02 / OBJECTIVE</p>
+      <h2>Project Objective</h2>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-card">
+        <h3>Content-Based Recommendation</h3>
+        <p>Membangun sistem yang merekomendasikan lagu berdasarkan kemiripan karakteristik audio.</p>
+      </div>
+      <div class="detail-card">
+        <h3>Audio Feature Analysis</h3>
+        <p>Mengidentifikasi fitur audio yang digunakan untuk merepresentasikan karakteristik lagu.</p>
+      </div>
+      <div class="detail-card">
+        <h3>Similarity Calculation</h3>
+        <p>Menerapkan StandardScaler dan Cosine Similarity untuk menghitung kemiripan antar lagu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATASET -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>03 / DATASET</p>
+      <h2>Dataset</h2>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-card">
+        <span class="dataset-number">5,000</span>
+        <span class="dataset-label">Songs</span>
+        <p class="dataset-note">Kumpulan track musik yang digunakan dalam sistem rekomendasi.</p>
+      </div>
+      <div class="detail-card">
+        <span class="dataset-number">19</span>
+        <span class="dataset-label">Columns</span>
+        <p class="dataset-note">Informasi track dan fitur audio untuk analisis kemiripan.</p>
+      </div>
+      <div class="detail-card">
+        <h3>Music Track &amp; Audio Features Dataset</h3>
+        <p>Dataset mencakup informasi lagu dan atribut audio seperti Danceability, Energy, Valence, Acousticness, serta Tempo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA PROCESSING -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>04 / DATA PROCESSING</p>
+      <h2>Data Processing Pipeline</h2>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-step"><span>STEP 01</span><strong>Data Understanding</strong></div>
+      <div class="pipeline-step"><span>STEP 02</span><strong>Data Cleaning</strong></div>
+      <div class="pipeline-step"><span>STEP 03</span><strong>EDA</strong></div>
+      <div class="pipeline-step"><span>STEP 04</span><strong>Feature Selection</strong></div>
+      <div class="pipeline-step"><span>STEP 05</span><strong>Standardization</strong></div>
+      <div class="pipeline-step"><span>STEP 06</span><strong>Cosine Similarity</strong></div>
+      <div class="pipeline-step"><span>STEP 07</span><strong>Recommendation</strong></div>
+    </div>
+  </section>
+
+  <!-- MODEL APPROACH -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>05 / MODEL APPROACH</p>
+      <h2>Content-Based Recommendation</h2>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-card">
+        <h3>01. Feature Selection</h3>
+        <p>Menggunakan 12 fitur numerik yang merepresentasikan karakteristik audio lagu.</p>
+      </div>
+      <div class="detail-card">
+        <h3>02. Feature Scaling</h3>
+        <p>StandardScaler digunakan untuk menstandarkan skala fitur audio sebelum perhitungan similarity.</p>
+      </div>
+      <div class="detail-card">
+        <h3>03. Similarity Measurement</h3>
+        <p>Cosine Similarity digunakan untuk mengukur kemiripan vektor fitur audio antar lagu.</p>
+      </div>
+      <div class="detail-card">
+        <h3>04. Recommendation Function</h3>
+        <p>Fungsi <code>recommend_song()</code> menghasilkan rekomendasi lagu serupa berdasarkan input lagu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISUALIZATION -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>06 / VISUALIZATION</p>
+      <h2>Exploratory Data Analysis</h2>
+    </div>
+    <div class="visual-grid">
+
+      <div class="visual-card">
+        <div class="visual-image">
+          <img
+            src="../project-assets/Song Recomendation/distribution.png"
+            alt="Song Recommendation Audio Feature Distribution"
+            loading="lazy"
+          >
+        </div>
+        <div class="visual-caption">
+          <strong>Audio Feature Distribution</strong>
+          <p>Distribusi karakteristik audio pada dataset lagu.</p>
+        </div>
+      </div>
+
+      <div class="visual-card">
+        <div class="visual-image">
+          <img
+            src="../project-assets/Song Recomendation/heatmap.png"
+            alt="Song Recommendation Audio Feature Correlation"
+            loading="lazy"
+          >
+        </div>
+        <div class="visual-caption">
+          <strong>Audio Feature Correlation</strong>
+          <p>Visualisasi korelasi antar fitur audio yang digunakan dalam analisis.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KEY FINDINGS -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>07 / KEY FINDINGS</p>
+      <h2>Key Findings</h2>
+    </div>
+    <div class="findings-list">
+      <div class="finding-item">
+        <div class="finding-number">01</div>
+        <p>Karakteristik audio digunakan untuk merepresentasikan kemiripan musikal antar lagu.</p>
+      </div>
+      <div class="finding-item">
+        <div class="finding-number">02</div>
+        <p>Standardisasi fitur dilakukan sebelum menghitung similarity agar perbedaan skala fitur lebih terkendali.</p>
+      </div>
+      <div class="finding-item">
+        <div class="finding-number">03</div>
+        <p>Cosine Similarity digunakan untuk menentukan lagu dengan karakteristik audio yang paling mirip.</p>
+      </div>
+      <div class="finding-item">
+        <div class="finding-number">04</div>
+        <p>Sistem berfokus pada kemiripan audio, bukan hanya popularitas lagu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOMMENDATION OUTPUT -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>08 / RECOMMENDATION OUTPUT</p>
+      <h2>Song Recommendation Results</h2>
+    </div>
+    <div class="visual-grid">
+      <div class="visual-card visual-card-wide">
+        <div class="visual-image">
+          <img
+            src="../project-assets/Song Recomendation/result.png"
+            alt="Song Recommendation Input and Results"
+            loading="lazy"
+          >
+        </div>
+        <div class="visual-caption">
+          <strong>Input Song &amp; Recommended Tracks</strong>
+          <p>Contoh input lagu dan hasil rekomendasi berdasarkan kemiripan karakteristik audio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="detail-section">
+    <div class="detail-heading">
+      <p>09 / TOOLS &amp; SKILLS</p>
+      <h2>Tools &amp; Technologies</h2>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-card">
+        <h3>Programming</h3>
+        <p>Python · Pandas · NumPy</p>
+      </div>
+      <div class="detail-card">
+        <h3>Machine Learning</h3>
+        <p>Scikit-learn · StandardScaler · Cosine Similarity</p>
+      </div>
+      <div class="detail-card">
+        <h3>Data Visualization</h3>
+        <p>Matplotlib · Seaborn · Exploratory Data Analysis</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GITHUB -->
+  <section class="detail-section">
+    <div class="github-panel">
+      <p class="project-label">EXPLORE THE PROJECT</p>
+      <h3>Lihat detail pengerjaan di GitHub</h3>
+      <p>
+        Source code, preprocessing, feature scaling, perhitungan similarity,
+        dan fungsi rekomendasi lagu dapat ditelusuri melalui repository project.
+      </p>
+      <a
+        href="https://github.com/naufalakhira14-gif/Song-Recommendation"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="github-button"
+      >View Repository</a>
+    </div>
+  </section>
+
+  <div class="bottom-back">
+    <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+  </div>
+
+</main>
+
+<!-- IMAGE LIGHTBOX -->
+<div id="imageLightbox" class="image-lightbox">
+  <button class="lightbox-close" id="closeLightbox" aria-label="Close image">×</button>
+  <img id="lightboxImage" src="" alt="Full size visualization">
+  <p id="lightboxCaption"></p>
+</div>
+
+<script>
+  const lightbox = document.getElementById("imageLightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxCaption = document.getElementById("lightboxCaption");
+
+  document.querySelectorAll(".visual-image img").forEach((img) => {
+    img.addEventListener("click", () => {
+      if (!img.complete || img.naturalWidth === 0) return;
+
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt;
+
+      const caption = img.closest(".visual-card")
+        .querySelector(".visual-caption strong");
+
+      lightboxCaption.textContent = caption ? caption.textContent : img.alt;
+      lightbox.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  function closeImageLightbox() {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  document.getElementById("closeLightbox")
+    .addEventListener("click", closeImageLightbox);
+
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox || event.target === lightboxImage) {
+      closeImageLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeImageLightbox();
+  });
+</script>
+
+</body>
+</html>
